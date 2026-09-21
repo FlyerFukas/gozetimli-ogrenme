@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gozetimli-ogrenme"
+version = "0.1.0"
+description = "Gözetimli öğrenme referansı: metrikler, çapraz doğrulama ve ağaç/boosting ölçütleri — Türkçe, test edilmiş."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "LicenseRef-PolyForm-Noncommercial-1.0.0"
+license-files = ["LICENSE", "COMMERCIAL.md"]
+authors = [{ name = "Furkan Akduman" }]
+keywords = ["makine-ogrenmesi", "gozetimli-ogrenme", "metrikler", "capraz-dogrulama", "turkce"]
+classifiers = [
+    "Natural Language :: Turkish",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["numpy>=1.24"]
+
+[project.optional-dependencies]
+# scikit-learn yalnızca test ve örnekler için gerekli; kütüphanenin kendisi
+# saf NumPy ile çalışır.
+test = ["pytest>=7.4", "scikit-learn>=1.3"]
+ornek = ["scikit-learn>=1.3", "matplotlib>=3.7", "pandas>=2.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["testler"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+python_classes = ["Test*"]
+addopts = "-v --strict-markers --tb=short"
+markers = [
+    "ders: ders notlarındaki el hesaplarını doğrulayan testler",
+    "sklearn: scikit-learn ile sayısal uyumu doğrulayan testler",
+    "yavas: saniyeler süren testler (kombinatorik bölücüler vb.)",
+]

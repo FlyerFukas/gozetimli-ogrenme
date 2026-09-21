@@ -1,0 +1,56 @@
+name: testler
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python kurulumu
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+
+      - name: Bağımlılıklar
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[test]"
+
+      - name: Testler
+        run: pytest -q
+
+      - name: Ders el hesapları (ayrıca raporla)
+        run: pytest -m ders -v
+
+  ornekler:
+    name: Örnek betikler
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[ornek]"
+      - name: Örnekler çalışıyor mu
+        run: |
+          python ornekler/01-siniflandirma-boru-hatti.py
+          python ornekler/02-ders-hesaplari.py
+          python ornekler/03-sizinti-karsilastirmasi.py

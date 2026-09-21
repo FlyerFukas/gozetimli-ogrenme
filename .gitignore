@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Sanal ortam
+.venv/
+venv/
+env/
+
+# Notebook
+.ipynb_checkpoints/
+
+# Editör / IDE
+.vscode/
+.idea/
+*.swp
+
+# İşletim sistemi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Üçüncü taraf ders materyali — TELİFLİ, DEPOYA GİRMEZ
+# (bkz. COMMERCIAL.md bölüm 7)
+*.pdf
+ders-notlari/
+kurs/
+
+# Yerel çıktılar
+cikti/
+gecici/

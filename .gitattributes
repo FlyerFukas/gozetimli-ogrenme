@@ -1,0 +1,6 @@
+# Depoda her şey LF ile saklanır; Windows'ta çalışma kopyası CRLF olabilir.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary
