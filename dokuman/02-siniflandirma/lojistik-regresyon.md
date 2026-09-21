@@ -35,7 +35,7 @@ biçimlidir.
 ```python
 from gozetimli.boosting import sigmoid, log_odds
 sigmoid(0.0)      # 0.5
-log_odds(0.75)    # 1.0986  — sigmoid'in tersi
+log_odds(0.75)    # 1.0986 , sigmoid'in tersi
 ```
 
 Bu implementasyon taşma güvenlidir: naif `1/(1+exp(-z))` formülü z = -1000'de
@@ -63,7 +63,7 @@ tercih edilir: her katsayı bir cümleyle açıklanabilir.
 
 ---
 
-## 3. Karar kuralı — 0.5 bir varsayımdır
+## 3. Karar kuralı: 0.5 bir varsayımdır
 
 Ders notundaki kural `ŷ = 1 eğer h(x) ≥ 0.5` doğrudur ama **koşulludur.**
 0.5 yalnızca şu iki koşulda optimaldir:
@@ -93,7 +93,7 @@ J(β) = -(1/m) Σ [ y⁽ⁱ⁾ log(h(x⁽ⁱ⁾)) + (1 - y⁽ⁱ⁾) log(1 - h(x
 `-log(1-h)` kalır. Doğru sınıfa verilen olasılık 1'e yakınsa ceza ~0, 0'a
 yakınsa ceza patlar.
 
-Bu fonksiyon **konvekstir** — tek bir global minimumu vardır ve gradient
+Bu fonksiyon **konvekstir:** tek bir global minimumu vardır ve gradient
 descent ona ulaşır.
 
 ```python
@@ -124,7 +124,7 @@ K sınıf için K ikili sınıflandırıcı. Her biri "ben mi, diğerleri mi?" s
 Her sınıf çifti için bir model: K(K-1)/2 model. Oylama ile karar verilir.
 
 - **Model sayısı:** K = 10 için 45 model
-- **Artı:** her model yalnızca iki sınıfın verisiyle eğitilir — daha dengeli ve
+- **Artı:** her model yalnızca iki sınıfın verisiyle eğitilir: daha dengeli ve
   daha küçük eğitim setleri
 - **Eksi:** model sayısı kareyle büyür
 
@@ -178,12 +178,12 @@ sonuc = capraz_dogrula(boru, X, y, bolucu=TabakaliKKat(5, karistir=True, tohum=0
 **Kullanın:**
 - Yorumlanabilirlik zorunluysa (regülasyon, kredi, klinik)
 - Kalibre olasılık gerekiyorsa
-- Baz çizgisi kurarken — her zaman ilk denenecek model
+- Baz çizgisi kurarken: her zaman ilk denenecek model
 - Özellik sayısı örnek sayısına yakınsa (düzenlileştirme ile)
 
 **Kullanmayın:**
 - İlişki güçlü şekilde doğrusal değilse (etkileşim/polinom terim eklemeden)
-- Karmaşık etkileşimler varsa — ağaç tabanlı modeller daha iyi
+- Karmaşık etkileşimler varsa: ağaç tabanlı modeller daha iyi
 - Özellikler arasında yüksek çoklu bağlantı varsa (katsayılar kararsızlaşır;
   Ridge cezası şart)
 

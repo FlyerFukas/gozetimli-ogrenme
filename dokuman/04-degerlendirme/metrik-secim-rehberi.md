@@ -1,4 +1,4 @@
-# Metrik seçim rehberi — hangi kıstas, ne zaman?
+# Metrik seçim rehberi: hangi kıstas, ne zaman?
 
 Bu dosya deponun çekirdeği. Bir modelin "iyi" olup olmadığı sorusunun tek bir
 cevabı yoktur; cevap, **hangi hatanın size neye mal olduğuna** bağlıdır. Metrik
@@ -12,23 +12,23 @@ seçimi teknik değil, iş kararıdır.
 
 ## 1. Önce şu üç soruyu yanıtla
 
-**Soru 1 — Hedef sayısal mı, kategorik mi?**
+**Soru 1. Hedef sayısal mı, kategorik mi?**
 Sayısal → [regresyon metrikleri](regresyon-metrikleri.md).
 Kategorik → devam et.
 
-**Soru 2 — İki hata türünden hangisi daha pahalı?**
+**Soru 2. İki hata türünden hangisi daha pahalı?**
 
 | | Model "pozitif" dedi | Model "negatif" dedi |
 |---|---|---|
-| **Gerçekte pozitif** | TP — istediğimiz | **FN** — kaçırılan vaka |
-| **Gerçekte negatif** | **FP** — yanlış alarm | TN — istediğimiz |
+| **Gerçekte pozitif** | TP: istediğimiz | **FN:** kaçırılan vaka |
+| **Gerçekte negatif** | **FP:** yanlış alarm | TN: istediğimiz |
 
 - FN pahalıysa → **recall**'u yükselt (kanser taraması: hastayı sağlıklı ilan etme)
 - FP pahalıysa → **precision**'ı yükselt (spam filtresi: gerçek postayı çöpe atma)
 - İkisi de benzer → **F1** ya da **MCC**
 
-**Soru 3 — Sınıflar dengeli mi?**
-%40–60 civarı → accuracy kullanılabilir.
+**Soru 3. Sınıflar dengeli mi?**
+%40-60 civarı → accuracy kullanılabilir.
 Daha dengesiz → accuracy yanıltır, aşağıdaki tabloya bak.
 
 ---
@@ -37,7 +37,7 @@ Daha dengesiz → accuracy yanıltır, aşağıdaki tabloya bak.
 
 | Durum | Kullan | Kullanma | Neden |
 |---|---|---|---|
-| Sınıflar dengeli, hatalar eşit maliyetli | `dogruluk` | — | En sezgisel |
+| Sınıflar dengeli, hatalar eşit maliyetli | `dogruluk` |: | En sezgisel |
 | Dengesiz (%10'dan az azınlık) | `f1_skoru`, `matthews_korelasyonu`, `ortalama_kesinlik` | `dogruluk` | Çoğunluğa "hayır" diyen model %90 accuracy alır |
 | FN pahalı (teşhis, arıza, dolandırıcılık) | `f_beta_skoru(beta=2)`, `duyarlilik` | `kesinlik` tek başına | Kaçırılan vaka geri gelmez |
 | FP pahalı (spam, otomatik blok, uyarı yorgunluğu) | `f_beta_skoru(beta=0.5)`, `kesinlik` | `duyarlilik` tek başına | Yanlış alarm güveni yıpratır |
@@ -45,7 +45,7 @@ Daha dengesiz → accuracy yanıltır, aşağıdaki tabloya bak.
 | Çok dengesiz + sıralama kalitesi | `ortalama_kesinlik` (PR-AUC) | `roc_auc` | ROC dengesizlikte iyimserdir |
 | Olasılık tahmini kullanılacak (fiyatlama, risk skoru) | `log_kaybi` | `dogruluk` | Kalibrasyonu ölçer |
 | Çok sınıflı, tüm sınıflar eşit önemli | `ortalama="makro"` | `ortalama="agirlikli"` | Azınlık sınıfı gizlenmesin |
-| Çok sınıflı, sınıf büyüklüğü önemli | `ortalama="agirlikli"` | — | Gerçek dağılımı yansıtır |
+| Çok sınıflı, sınıf büyüklüğü önemli | `ortalama="agirlikli"` |: | Gerçek dağılımı yansıtır |
 | Karşılaştırmalı rapor, tek sayı isteniyor | `matthews_korelasyonu` | `dogruluk` | Dört hücreyi de kullanır |
 
 ### ROC-AUC mı, PR-AUC mı?
@@ -57,7 +57,7 @@ Bu ayrım pratikte en çok karıştırılan yerdir:
   FPR paydası çok büyüktür, yüzlerce yanlış alarm FPR'yi neredeyse hiç
   oynatmaz. Model gözle görülür şekilde kötüyken AUC 0.95 çıkabilir.
 - **PR-AUC (`ortalama_kesinlik`)** taban çizgisi pozitif sınıf oranına eşittir.
-  %1 pozitifli veride rastgele model 0.01 alır — 0.5 değil. Bu yüzden
+  %1 pozitifli veride rastgele model 0.01 alır, 0.5 değil. Bu yüzden
   iyileşmeyi görmek çok daha kolaydır.
 
 Kural: **pozitif sınıf %10'un altındaysa PR-AUC'yi birincil metrik yap**,
@@ -121,13 +121,13 @@ Sıfıra yakın değerler varsa `smape` (sınırlı, [0, 2]) veya doğrudan `mae
 
 ---
 
-## 4. Tek metrik yetmez — minimum rapor seti
+## 4. Tek metrik yetmez: minimum rapor seti
 
 Tek sayı her zaman bir şey gizler. Gerçek bir değerlendirme raporu şunları
 içermeli:
 
 **Sınıflandırma:**
-1. Karmaşıklık matrisi (ham sayılar — yüzde değil)
+1. Karmaşıklık matrisi (ham sayılar: yüzde değil)
 2. Sınıf başına precision / recall / F1 / destek
 3. Eşikten bağımsız bir metrik (ROC-AUC veya PR-AUC)
 4. Çapraz doğrulama katlarının **ortalaması ve standart sapması**
@@ -142,7 +142,7 @@ print(siniflandirma_raporu(y_test, tahminler, metin=True))
 1. RMSE ve MAE birlikte (aradaki fark aykırı değer sinyalidir)
 2. R² (tercihen düzeltilmiş)
 3. Maksimum hata
-4. Kalıntı grafiği — metrik değil ama en bilgilendirici tek görsel
+4. Kalıntı grafiği: metrik değil ama en bilgilendirici tek görsel
 
 ```python
 from gozetimli.metrikler.regresyon import regresyon_raporu
@@ -151,7 +151,7 @@ print(regresyon_raporu(y_test, tahminler, ozellik_sayisi=X.shape[1]))
 
 **RMSE ile MAE arasındaki fark ne söyler?**
 RMSE ≈ MAE ise hatalar birbirine yakın büyüklüktedir. RMSE, MAE'nin iki
-katından fazlaysa birkaç büyük hata ortalamayı taşıyordur — o örneklere bakın.
+katından fazlaysa birkaç büyük hata ortalamayı taşıyordur, o örneklere bakın.
 
 ---
 
@@ -173,7 +173,7 @@ esik, kesinlik_degeri, _, _ = esik_tara(
 ```
 
 **Kritik kural:** eşik **doğrulama** setinde seçilir, test setinde değil. Test
-setinde seçilen eşik, test skorunu iyimser yönde bozar — bu da bir sızıntı
+setinde seçilen eşik, test skorunu iyimser yönde bozar, bu da bir sızıntı
 biçimidir.
 
 ---
@@ -213,7 +213,7 @@ problem tanımına ya da veriye dönün.
 
 ## İlgili belgeler
 
-- [Sınıflandırma metrikleri](siniflandirma-metrikleri.md) — tanımlar ve formüller
+- [Sınıflandırma metrikleri](siniflandirma-metrikleri.md): tanımlar ve formüller
 - [Regresyon metrikleri](regresyon-metrikleri.md)
-- [Çapraz doğrulama](capraz-dogrulama.md) — bölme stratejileri
-- [Veri sızıntısı](veri-sizintisi.md) — skorları sahte yapan hatalar
+- [Çapraz doğrulama](capraz-dogrulama.md): bölme stratejileri
+- [Veri sızıntısı](veri-sizintisi.md): skorları sahte yapan hatalar

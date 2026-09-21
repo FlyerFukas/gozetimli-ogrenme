@@ -1,15 +1,15 @@
 # gozetimli-ogrenme
 
-**Gözetimli öğrenme için Türkçe referans: metrikler, çapraz doğrulama ve ağaç/boosting ölçütleri — sıfırdan yazılmış, scikit-learn'e karşı doğrulanmış, 562 testle korunan.**
+**Gözetimli öğrenme için Türkçe referans: metrikler, çapraz doğrulama ve ağaç/boosting ölçütleri, sıfırdan yazılmış, scikit-learn'e karşı doğrulanmış, 562 testle korunan.**
 
 Bu depo bir "ders notu özeti" değil. Üç şey yapar:
 
-1. **Değerlendirme araçlarını çalıştırılabilir kod olarak verir** — 18 sınıflandırma
+1. **Değerlendirme araçlarını çalıştırılabilir kod olarak verir:** 18 sınıflandırma
    metriği, 13 regresyon metriği, 7 çapraz doğrulama stratejisi, ağaç bölme ve
    boosting hesapları. Hepsi saf NumPy, hepsi Türkçe adlandırılmış.
-2. **Hangi metriğin ne zaman kullanılacağını karar tablolarıyla anlatır** —
+2. **Hangi metriğin ne zaman kullanılacağını karar tablolarıyla anlatır**:
    teknik tanım değil, iş kararı olarak.
-3. **Kaynak materyaldeki hesap hatalarını bulur ve belgeler** — her el hesabı
+3. **Kaynak materyaldeki hesap hatalarını bulur ve belgeler:** her el hesabı
    kodla yeniden üretildi; tutmayan beş tanesi doğru değerleriyle yazıldı.
 
 ```bash
@@ -43,7 +43,7 @@ from gozetimli.dogrulama.bolme import TabakaliKKat
 from gozetimli.dogrulama.capraz import capraz_dogrula
 from gozetimli.metrikler.siniflandirma import f1_skoru, roc_auc
 
-# Kat kat çapraz doğrulama — aşırı öğrenme farkıyla birlikte
+# Kat kat çapraz doğrulama: aşırı öğrenme farkıyla birlikte
 sonuc = capraz_dogrula(model, X, y,
                        bolucu=TabakaliKKat(5, karistir=True, tohum=42),
                        metrikler={"f1": f1_skoru, "auc": roc_auc},
@@ -54,7 +54,7 @@ print(sonuc.ozet())
 # Sınıf başına rapor
 print(siniflandirma_raporu(y_test, tahminler, metin=True))
 
-# Karar eşiğini veriye göre seç — 0.5 kutsal bir sayı değil
+# Karar eşiğini veriye göre seç: 0.5 kutsal bir sayı değil
 esik, skor, _, _ = esik_tara(y_dogrulama, olasiliklar,
                              metrik="kesinlik", en_az_duyarlilik=0.90)
 ```
@@ -63,7 +63,7 @@ esik, skor, _, _ = esik_tara(y_dogrulama, olasiliklar,
 
 ## İçerik
 
-### Kod — [`src/gozetimli/`](src/gozetimli/)
+### Kod: [`src/gozetimli/`](src/gozetimli/)
 
 | Modül | İçerik |
 |---|---|
@@ -75,14 +75,14 @@ esik, skor, _, _ = esik_tara(y_dogrulama, olasiliklar,
 | [`boosting.py`](src/gozetimli/boosting.py) | Sigmoid/log-odds, AdaBoost ağırlıkları, XGBoost similarity/gain/cover |
 | [`veri/ders_verileri.py`](src/gozetimli/veri/ders_verileri.py) | Ders notlarındaki 10 öğretici mini veri seti |
 
-### Belgeler — [`dokuman/`](dokuman/)
+### Belgeler: [`dokuman/`](dokuman/)
 
 **Değerlendirme (deponun çekirdeği):**
-- **[Metrik seçim rehberi](dokuman/04-degerlendirme/metrik-secim-rehberi.md)** — hangi kıstas, ne zaman? Karar tabloları.
+- **[Metrik seçim rehberi](dokuman/04-degerlendirme/metrik-secim-rehberi.md):** hangi kıstas, ne zaman? Karar tabloları.
 - [Sınıflandırma metrikleri](dokuman/04-degerlendirme/siniflandirma-metrikleri.md)
 - [Regresyon metrikleri](dokuman/04-degerlendirme/regresyon-metrikleri.md)
-- [Çapraz doğrulama](dokuman/04-degerlendirme/capraz-dogrulama.md) — 7 strateji + nested CV
-- **[Veri sızıntısı](dokuman/04-degerlendirme/veri-sizintisi.md)** — ölçülmüş örneklerle
+- [Çapraz doğrulama](dokuman/04-degerlendirme/capraz-dogrulama.md): 7 strateji + nested CV
+- **[Veri sızıntısı](dokuman/04-degerlendirme/veri-sizintisi.md):** ölçülmüş örneklerle
 
 **Algoritmalar:**
 - [Polinom regresyon ve düzenlileştirme](dokuman/01-regresyon/polinom-ve-duzenlilestirme.md)
@@ -91,11 +91,11 @@ esik, skor, _, _ = esik_tara(y_dogrulama, olasiliklar,
 - [Karar ağaçları](dokuman/03-agac-tabanli/karar-agaci.md)
 - [Topluluk öğrenme ve boosting](dokuman/03-agac-tabanli/topluluk-ve-boosting.md)
 
-**[Kaynak notları](dokuman/KAYNAK-NOTLARI.md)** — ders materyalinde tespit edilen hatalar.
+**[Kaynak notları](dokuman/KAYNAK-NOTLARI.md):** ders materyalinde tespit edilen hatalar.
 
 ---
 
-## Testler — sayıların gerçekten doğru olduğunun kanıtı
+## Testler: sayıların gerçekten doğru olduğunun kanıtı
 
 562 test, dört ayrı doğrulama katmanı:
 
@@ -139,7 +139,7 @@ Kaynak notlardaki tüm el hesapları doğrulandı. Beşi tutmadı:
 | 4 | XGBoost S_kök = 0 gerekçesi | "tek grup var" | **Σ artık = 0** |
 | 5 | XGBoost Gain formülü | ½ ve γ eksik | makale biçimi de sunuldu |
 
-Ayrıca 1–4 numaralı PDF'ler klasörde yoktu; regresyon metrikleri o yüzden
+Ayrıca 1-4 numaralı PDF'ler klasörde yoktu; regresyon metrikleri o yüzden
 standart literatürden alındı ve ayrıca işaretlendi.
 
 Her bulgu bir testle korunuyor:
@@ -174,8 +174,8 @@ Kişisel kullanım, öğrenme, akademik araştırma, eğitim kurumları, kamu ve
 kurumları için **ücretsiz**. Bir işletme için ya da ticari bir amaçla kullanım
 **ayrı, ücretli lisans gerektirir**.
 
-- [LICENSE](LICENSE) — bağlayıcı metin
-- [COMMERCIAL.md](COMMERCIAL.md) — ticari lisans koşulları ve iletişim
+- [LICENSE](LICENSE): bağlayıcı metin
+- [COMMERCIAL.md](COMMERCIAL.md): ticari lisans koşulları ve iletişim
 
 ---
 
@@ -186,5 +186,5 @@ gözetimli öğrenme ders notları çalışılarak yazılmıştır. Kavramsal ç
 öğretici örnekler oradan gelir.
 
 Ders notlarının kendisi (PDF'ler, şekiller, metin) **bu depoda yer almaz** ve
-eklenmemelidir — telif hakları kendi sahibine aittir. Depodaki her satır metin
+eklenmemelidir, telif hakları kendi sahibine aittir. Depodaki her satır metin
 ve kod özgün olarak yazılmıştır.

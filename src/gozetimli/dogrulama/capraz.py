@@ -8,7 +8,7 @@ Neden kendi çalıştırıcımız var?
     scikit-learn'ün `cross_validate`'i zaten iyi. Bu modül onu taklit etmek
     için değil, ÇAPRAZ DOĞRULAMANIN İÇİNİ görünür kılmak için var: her katın
     skoru, eğitim skoru (aşırı öğrenme farkı), kat kat dağılım. `ozet()`
-    çıktısı ortalamanın yanında standart sapmayı da verir — tek bir ortalama
+    çıktısı ortalamanın yanında standart sapmayı da verir, tek bir ortalama
     sayı, modelin kararlı olup olmadığını gizler.
 """
 
@@ -178,7 +178,7 @@ def capraz_tahmin(model, X, y, *, bolucu, gruplar=None, olasilik: bool = False):
 
 def ic_ice_capraz_dogrula(model_kurucu, X, y, *, dis_bolucu, ic_bolucu,
                           izgara, metrik, gruplar=None, buyuk_iyi: bool = True):
-    """İç içe (nested) çapraz doğrulama — hiperparametre seçimi dahil dürüst skor.
+    """İç içe (nested) çapraz doğrulama, hiperparametre seçimi dahil dürüst skor.
 
     Neden gerekli?
         Hiperparametreyi tüm veri üzerinde CV ile seçip sonra aynı CV skorunu
@@ -186,7 +186,7 @@ def ic_ice_capraz_dogrula(model_kurucu, X, y, *, dis_bolucu, ic_bolucu,
         sızdırır. İyimser sapma, çok denenen ızgaralarda birkaç puana çıkar.
 
     Nasıl çalışır?
-        Dış döngü: veriyi eğitim/test diye böler — skor buradan gelir.
+        Dış döngü: veriyi eğitim/test diye böler, skor buradan gelir.
         İç döngü: yalnızca dış eğitim parçasında en iyi hiperparametreyi seçer.
 
     model_kurucu: parametre sözlüğü alıp model döndüren çağrılabilir nesne.

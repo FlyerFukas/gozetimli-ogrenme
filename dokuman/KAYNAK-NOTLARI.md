@@ -1,7 +1,7 @@
 # Kaynak notları: ders materyalinde tespit edilen tutarsızlıklar
 
 Bu deponun içeriği, **Atıl Samancıoğlu**'nun makine öğrenmesi kursundaki
-gözetimli öğrenme bölümü ders notları (5–19 numaralı PDF'ler) çalışılarak
+gözetimli öğrenme bölümü ders notları (5-19 numaralı PDF'ler) çalışılarak
 yazıldı. Ders notlarındaki her sayısal el hesabı kodla yeniden üretildi.
 
 **Çoğu tuttu.** Entropi, Gini, bilgi kazancı, KNN mesafeleri, Naive Bayes
@@ -63,7 +63,7 @@ Tüm eşikler için varyans azaltımı (kök varyans 113.2653 ile):
 Notun 94.64 rakamı hatalı kök varyanstan türemiş: `124.83 - 30.19 = 94.64`.
 Ağırlıklı varyans 30.19 doğrudur.
 
-Kök varyans tüm eşiklere sabit bir kaydırma uygular, **sıralamayı değiştirmez** —
+Kök varyans tüm eşiklere sabit bir kaydırma uygular, **sıralamayı değiştirmez**:
 yani 3.1'in seçilmesi ayrı bir hatadır. Notun Tablo 3'ündeki diğer özet sayılar
 (3.35 → 80.3 gibi) de yeniden üretilemiyor.
 
@@ -101,7 +101,7 @@ tutturamaz.
 **Notta:** "S_root = 0 (çünkü kök düğümde tek bir grup var)"
 **Doğrusu:** sonuç doğru, gerekçe yanlış
 
-Tek grup olması similarity'yi sıfırlamaz — formül `(Σg)²/(Σh+λ)`, tek gruptaki
+Tek grup olması similarity'yi sıfırlamaz, formül `(Σg)²/(Σh+λ)`, tek gruptaki
 gradyan toplamı sıfırdan farklı olabilir.
 
 Doğru sebep: **artıkların toplamı tam olarak sıfırdır.**
@@ -112,7 +112,7 @@ Doğru sebep: **artıkların toplamı tam olarak sıfırdır.**
 
 Ve bu bir tesadüf değil: F₀ log-odds olarak seçildiğinde `Σ(y - p) = 0` olması,
 F₀'ın log-loss'u minimize etmesinin **birinci derece koşuludur.** Yani her
-gradient boosting turunun başında kök similarity'si sıfırdan başlar — bu,
+gradient boosting turunun başında kök similarity'si sıfırdan başlar, bu,
 anlaşılmaya değer bir özelliktir.
 
 **Doğrulayan testler:**
@@ -134,7 +134,7 @@ System*, Denklem 7) tam biçim:
 Gain = ½ · [ G_sol²/(H_sol+λ) + G_sağ²/(H_sağ+λ) - (G_sol+G_sağ)²/(H+λ) ] - γ
 ```
 
-½ ve γ notta yok. ½ ortak çarpan olduğu için **bölme sıralaması değişmez** —
+½ ve γ notta yok. ½ ortak çarpan olduğu için **bölme sıralaması değişmez**:
 öğretici amaçla makul bir sadeleştirme. Ama gerçek `xgboost` kütüphanesinin
 bastığı gain değeriyle karşılaştırırsanız sayılar **2 kat** farklı çıkar ve
 γ'sız formülde ön budama davranışı görünmez.
@@ -168,7 +168,7 @@ Notun asıl hesapları (ε = 0.249, α₂ = 0.552) tutarlıdır ve doğrulanmı�
 
 ## 7. Regresyon metrikleri: kaynak eksik
 
-Elimizdeki klasörde **1–4 numaralı PDF'ler yok** (dosyalar 5'ten başlıyor).
+Elimizdeki klasörde **1-4 numaralı PDF'ler yok** (dosyalar 5'ten başlıyor).
 Mevcut notlarda MAE, RMSE, R², MAPE gibi regresyon metrikleri **tanımlanmıyor**;
 MSE yalnızca doğrusal/Ridge/Lasso maliyet fonksiyonunun içinde, varyans ise
 ağaç bölme ölçütü olarak geçiyor.
@@ -178,7 +178,7 @@ regresyon, gradient descent ve regresyon metriklerini kapsıyor.
 
 `gozetimli/metrikler/regresyon.py` içindeki tanımlar standart istatistik/ML
 literatüründen alınmış ve `testler/test_sklearn_uyumu.py` içinde scikit-learn'e
-karşı doğrulanmıştır — ders notundan türetilmemiştir. Bu ayrım modülün
+karşı doğrulanmıştır, ders notundan türetilmemiştir. Bu ayrım modülün
 docstring'inde de yazılıdır.
 
 ---

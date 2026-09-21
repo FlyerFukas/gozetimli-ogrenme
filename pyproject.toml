@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "gozetimli-ogrenme"
 version = "0.1.0"
-description = "Gözetimli öğrenme referansı: metrikler, çapraz doğrulama ve ağaç/boosting ölçütleri — Türkçe, test edilmiş."
+description = "Gözetimli öğrenme referansı: metrikler, çapraz doğrulama ve ağaç/boosting ölçütleri. Türkçe, test edilmiş."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "LicenseRef-PolyForm-Noncommercial-1.0.0"

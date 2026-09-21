@@ -3,11 +3,11 @@
 ## Nereden başlamalı?
 
 **Bir model değerlendiriyorsan:**
-→ [Metrik seçim rehberi](04-degerlendirme/metrik-secim-rehberi.md) — hangi kıstas, ne zaman?
+→ [Metrik seçim rehberi](04-degerlendirme/metrik-secim-rehberi.md), hangi kıstas, ne zaman?
 
 **Çapraz doğrulama kuruyorsan:**
-→ [Çapraz doğrulama](04-degerlendirme/capraz-dogrulama.md) — hangi bölücü, neden?
-→ [Veri sızıntısı](04-degerlendirme/veri-sizintisi.md) — kurulumu teslim etmeden önce oku
+→ [Çapraz doğrulama](04-degerlendirme/capraz-dogrulama.md), hangi bölücü, neden?
+→ [Veri sızıntısı](04-degerlendirme/veri-sizintisi.md), kurulumu teslim etmeden önce oku
 
 **Bir algoritmayı anlamaya çalışıyorsan:**
 → Aşağıdaki algoritma belgeleri
@@ -45,8 +45,8 @@
 ## Kaynak notu
 
 Bu belgeler **Atıl Samancıoğlu**'nun makine öğrenmesi kursundaki gözetimli
-öğrenme ders notları (5–19 numaralı PDF'ler) çalışılarak yazıldı. Kavramsal
+öğrenme ders notları (5-19 numaralı PDF'ler) çalışılarak yazıldı. Kavramsal
 çerçeve ve öğretici örnekler oradan gelir; metinlerin tamamı özgün olarak
 yazılmıştır.
 
-Ders notu PDF'leri bu depoda **yer almaz** — telif hakları kendi sahibine aittir.
+Ders notu PDF'leri bu depoda **yer almaz:** telif hakları kendi sahibine aittir.

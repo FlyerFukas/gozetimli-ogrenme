@@ -1,4 +1,4 @@
-# Çapraz doğrulama — model nasıl test edilir?
+# Çapraz doğrulama: model nasıl test edilir?
 
 Kaynak ders notu: `7-Types_of_Cross_Validation.pdf`.
 Kod: [`gozetimli/dogrulama/`](../../src/gozetimli/dogrulama/) ·
@@ -9,7 +9,7 @@ Test: [`testler/test_bolme.py`](../../testler/test_bolme.py), [`testler/test_cap
 ## 1. Neden tek bir train/test bölmesi yetmez?
 
 Tek bölmede raporladığınız skor, **o bölmenin şansını** da içerir. Küçük
-veride bu şans birkaç puan oynatabilir — yani iki model arasındaki "fark"
+veride bu şans birkaç puan oynatabilir, yani iki model arasındaki "fark"
 tamamen bölme kaynaklı olabilir.
 
 Çapraz doğrulama aynı veriyi k farklı şekilde bölüp k skor üretir. Size
@@ -80,7 +80,7 @@ KKat(5, karistir=True, tohum=42)
   ölümcül bir hatadır.
 - **Zaman serisinde kullanmayın.**
 
-### Stratified K-Fold — sınıflandırmanın varsayılanı
+### Stratified K-Fold: sınıflandırmanın varsayılanı
 
 Her katta sınıf oranları korunur. Ders notu: *"Katmanlardaki etiket oranlarını
 (ör. %60 1 ve %40 0) her katmanda korumaya çalışır."*
@@ -112,7 +112,7 @@ Ders notunun dezavantaj listesi doğru, ama bir tanesi eklenmeli:
 - **Kat başına skor ikili olur**: tek örnekte accuracy ya 0 ya 1'dir. Ortalama
   anlamlıdır ama standart sapma yorumlanamaz.
 - Eğitim setleri neredeyse birbirinin aynısıdır, bu yüzden skorlar yüksek
-  korelasyonludur — varyans tahmini güvenilmez.
+  korelasyonludur, varyans tahmini güvenilmez.
 
 n < ~100 olan küçük veri setleri dışında K-Fold tercih edilir.
 
@@ -136,7 +136,7 @@ Kombinatorik patlama gerçektir:
 Bu implementasyon `guvenlik_siniri` (varsayılan 100 000) ile erken hata verir;
 bilinçli olarak yükseltilebilir. Pratikte nadiren gerekir.
 
-### Time Series CV — sıra bozulamaz
+### Time Series CV: sıra bozulamaz
 
 Ders notu: *"Geçmiş veriler eğitimde, ileri tarihli veriler doğrulamada
 kullanılır. Veri sırası mutlaka korunmalıdır."*
@@ -163,7 +163,7 @@ bu bölücüyle açık bir hata verir.
 
 ## 4. Ders notunda olmayan ama gereken iki strateji
 
-### GrupKKat — sızıntının en sık kaynağı
+### GrupKKat: sızıntının en sık kaynağı
 
 Aynı gruba ait satırlar asla eğitim ve testte birlikte bulunmaz.
 
@@ -181,7 +181,7 @@ Satır bazlı bölerseniz model "bu hastayı zaten gördüm" der. Test dosyasın
 CV %98+, grup bazlı CV %80'in altında sonuç veriyor. Aradaki 20 puan tamamen
 sahtedir.
 
-### TekrarliKKat — bölme şansını ortalamak
+### TekrarliKKat: bölme şansını ortalamak
 
 ```python
 from gozetimli.dogrulama.bolme import TekrarliKKat
@@ -232,7 +232,7 @@ dis_skorlar, secilen = ic_ice_capraz_dogrula(
     metrik=dogruluk)
 ```
 
-- **Dış döngü:** veriyi eğitim/test diye böler — **raporlanacak skor budur.**
+- **Dış döngü:** veriyi eğitim/test diye böler: **raporlanacak skor budur.**
 - **İç döngü:** yalnızca dış eğitim parçasında en iyi hiperparametreyi seçer.
 
 Test dosyasındaki `test_nested_cv_iyimser_sapmayi_onler`, sinyalsiz veride
@@ -241,7 +241,7 @@ kaldığını gösteriyor.
 
 **Ek fayda:** `secilen` listesi kat kat seçilen parametreleri döndürür.
 Katlar arasında çok farklı parametreler seçiliyorsa, modeliniz o
-hiperparametreye karşı kararsızdır — bu, tek başına değerli bir bulgudur.
+hiperparametreye karşı kararsızdır, bu, tek başına değerli bir bulgudur.
 
 ---
 
@@ -265,7 +265,7 @@ birleşimidir. Bu yüzden OOF skoru, kat ortalamasından biraz farklı çıkabil
 
 ---
 
-## 8. Öğrenme eğrisi — bias mı varyans mı?
+## 8. Öğrenme eğrisi: bias mı varyans mı?
 
 ```python
 from gozetimli.dogrulama.capraz import ogrenme_egrisi
@@ -289,15 +289,15 @@ olarak ikinci satırdır.
 
 ## 9. En kritik kural: her şey döngünün İÇİNDE
 
-Ölçekleme, eksik değer doldurma, özellik seçimi, kodlama — **öğrenen her adım**
+Ölçekleme, eksik değer doldurma, özellik seçimi, kodlama, **öğrenen her adım**
 çapraz doğrulama döngüsünün içinde olmalıdır.
 
 ```python
-# YANLIŞ — test katının bilgisi eğitime sızar
+# YANLIŞ: test katının bilgisi eğitime sızar
 X_olcekli = StandardScaler().fit_transform(X)
 capraz_dogrula(model, X_olcekli, y, ...)
 
-# DOĞRU — her katta yeniden öğrenilir
+# DOĞRU: her katta yeniden öğrenilir
 from sklearn.pipeline import Pipeline
 boru = Pipeline([("olcek", StandardScaler()), ("model", model)])
 capraz_dogrula(boru, X, y, ...)

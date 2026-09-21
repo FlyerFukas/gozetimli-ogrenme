@@ -1,4 +1,4 @@
-"""Veri bölme stratejileri — ders notundaki 5 çapraz doğrulama yöntemi + grup/tekrar.
+"""Veri bölme stratejileri, ders notundaki 5 çapraz doğrulama yöntemi + grup/tekrar.
 
 Ders notu (7-Types_of_Cross_Validation) şunları anlatır:
     Leave-One-Out, Leave-P-Out, K-Fold, Stratified K-Fold, Time Series CV.
@@ -44,11 +44,11 @@ class _Bolucu:
     """Ortak iskelet: sklearn takma adlarını ve tekrarlı temsili tek yerde tutar."""
 
     def split(self, X, y=None, groups=None):
-        """scikit-learn uyumlu takma ad — `bol` ile aynı."""
+        """scikit-learn uyumlu takma ad, `bol` ile aynı."""
         return self.bol(X, y, groups)
 
     def get_n_splits(self, X=None, y=None, groups=None):
-        """scikit-learn uyumlu takma ad — `kat_sayisi` ile aynı."""
+        """scikit-learn uyumlu takma ad, `kat_sayisi` ile aynı."""
         return self.kat_sayisi(X, y, groups)
 
     def __repr__(self):
@@ -67,7 +67,7 @@ class KKat(_Bolucu):
 
     karistir=True verildiğinde bölmeden önce satırlar karıştırılır. Verinin
     sıralı geldiği durumlarda (ör. önce tüm 0'lar, sonra tüm 1'ler) karıştırmamak
-    katları tamamen tek sınıflı yapar — bu sessiz ve ölümcül bir hatadır.
+    katları tamamen tek sınıflı yapar, bu sessiz ve ölümcül bir hatadır.
     ZAMAN SERİSİNDE KARIŞTIRMA: geleceği görüp geçmişi tahmin etmiş olursun.
     """
 
@@ -192,7 +192,7 @@ class BirDisarida(_Bolucu):
 class PDisarida(_Bolucu):
     """Leave-P-Out: her turda p gözlem test edilir, TÜM kombinasyonlar denenir.
 
-    Tur sayısı C(n, p) — kombinatorik patlama gerçektir:
+    Tur sayısı C(n, p), kombinatorik patlama gerçektir:
         n=20, p=2  ->    190 tur
         n=20, p=5  -> 15 504 tur
         n=50, p=5  -> 2 118 760 tur

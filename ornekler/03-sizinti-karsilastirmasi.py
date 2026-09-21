@@ -42,7 +42,7 @@ def karsilastir(yanlis: float, dogru: float, birim: str = "") -> None:
 def ozellik_secimi_sizintisi() -> None:
     baslik("1. ÖZELLİK SEÇİMİ SIZINTISI")
     print("Kurulum: 200 örnek, 2000 rastgele özellik, RASTGELE etiket.")
-    print("Veride hiçbir gerçek sinyal yok — dürüst skor 0.50 olmalı.")
+    print("Veride hiçbir gerçek sinyal yok: dürüst skor 0.50 olmalı.")
 
     uretec = np.random.default_rng(42)
     X = uretec.normal(size=(200, 2000))
@@ -106,7 +106,7 @@ def zaman_sizintisi() -> None:
     karsilastir(yanlis, dogru, birim=" R²")
     print("\n  K-Fold, modelin rejim değişimini tamamen kaçırdığını GİZLİYOR.")
     print("  Dürüst değerlendirme, modelin ortalamayı söylemekten bile kötü")
-    print("  olduğunu gösteriyor — ki gerçek budur.")
+    print("  olduğunu gösteriyor: ki gerçek budur.")
 
 
 def main() -> None:
@@ -116,7 +116,7 @@ def main() -> None:
 
     baslik("KONTROL LİSTESİ")
     for madde in [
-        "Ölçekleme, doldurma, kodlama, özellik seçimi — hepsi Pipeline içinde mi?",
+        "Ölçekleme, doldurma, kodlama, özellik seçimi, hepsi Pipeline içinde mi?",
         "Tekrar eden bir varlık (kişi/mağaza/belge) var mı? -> GrupKKat",
         "Veri zamana bağlı mı? -> ZamanSerisiBolme, gerekiyorsa bosluk=",
         "Sınıflandırmada TabakaliKKat kullanıldı mı?",

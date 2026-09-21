@@ -38,7 +38,7 @@ def main() -> None:
     farklar = []
 
     # ------------------------------------------------- 13: karar ağacı
-    baslik("13 — KARAR AĞACI (kredi onay verisi: 4 Onay, 3 Red)")
+    baslik("13. KARAR AĞACI (kredi onay verisi: 4 Onay, 3 Red)")
     veri = kredi_onay()
     print(veri.tablo())
     print()
@@ -54,7 +54,7 @@ def main() -> None:
     print("  -> Mülakat bölmesi seçilir (daha yüksek kazanç)")
 
     # --------------------------------------- 13: regresyon ağacı (HATA VAR)
-    baslik("13 — KARAR AĞACI REGRESÖRÜ (burs verisi)  [NOTTA HATA]")
+    baslik("13. KARAR AĞACI REGRESÖRÜ (burs verisi)  [NOTTA HATA]")
     burs = burs_regresyon()
     gpa, hedef = burs.X.ravel(), burs.y
     maske = gpa <= 3.1
@@ -82,7 +82,7 @@ def main() -> None:
         print("  -> Not 3.1'i en iyi sayıyor; hesap 3.35'i gösteriyor.")
 
     # ----------------------------------------------------- 16: AdaBoost
-    baslik("16 — ADABOOST (7 örnek, 1 yanlış)")
+    baslik("16. ADABOOST (7 örnek, 1 yanlış)")
     satir("alfa_1 = ½ln((1-ε)/ε), ε=1/7", adaboost_agirlik_katsayisi(1 / 7), 0.895)
 
     w = np.full(7, 1 / 7)
@@ -107,7 +107,7 @@ def main() -> None:
           adaboost_nihai_skor([0.895, 0.552], [1, 1]), 1.447)
 
     # -------------------------------------------- 18: XGBoost (HATA VAR)
-    baslik("18 — XGBOOST SINIFLANDIRMA (5 pozitif / 2 negatif, λ=1)  [NOTTA HATA]")
+    baslik("18. XGBOOST SINIFLANDIRMA (5 pozitif / 2 negatif, λ=1)  [NOTTA HATA]")
     xgb = xgb_siniflandirma()
     f0 = gb_baslangic_degeri(xgb.y, gorev="siniflandirma")
     p0 = float(sigmoid(f0))
@@ -142,7 +142,7 @@ def main() -> None:
     satir("p1 (ID1)", float(sigmoid(f1)), 0.699)
 
     # ----------------------------------------------- 18: XGBoost regresyon
-    baslik("18 — XGBOOST REGRESYON (λ=0)")
+    baslik("18. XGBOOST REGRESYON (λ=0)")
     reg = xgb_regresyon()
     satir("F0 (ortalama)", gb_baslangic_degeri(reg.y), 5000)
     r = reg.y - 5000.0

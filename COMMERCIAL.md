@@ -68,7 +68,7 @@ kişilik işletmeler için indirimli koşullar mümkündür.
 
 ## 4. İletişim
 
-- **GitHub:** [github.com/FlyerFukas](https://github.com/FlyerFukas) — depoda
+- **GitHub:** [github.com/FlyerFukas](https://github.com/FlyerFukas): depoda
   issue açabilirsiniz (gizli konular için doğrudan mesaj tercih edin)
 - **E-posta:** furkanakduman3452@gmail.com
 

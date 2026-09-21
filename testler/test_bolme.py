@@ -1,9 +1,9 @@
 """Veri bölme stratejilerinin testleri.
 
 Her bölücü için üç şey doğrulanır:
-  1. Sözleşme  — kaç bölme üretiyor, indeksler geçerli mi, eğitim/test ayrık mı.
-  2. Vaat      — tabakalı gerçekten oranı koruyor mu, grup gerçekten sızdırmıyor mu.
-  3. Tuzak     — yanlış bölücü seçildiğinde ne bozuluyor (sızıntı gösterimleri).
+  1. Sözleşme : kaç bölme üretiyor, indeksler geçerli mi, eğitim/test ayrık mı.
+  2. Vaat     : tabakalı gerçekten oranı koruyor mu, grup gerçekten sızdırmıyor mu.
+  3. Tuzak    : yanlış bölücü seçildiğinde ne bozuluyor (sızıntı gösterimleri).
 """
 
 from __future__ import annotations
@@ -76,7 +76,7 @@ class TestKKat:
         y = np.array([0] * 10 + [1] * 10)
         X = np.arange(20).reshape(-1, 1)
         kat_siniflari = [set(y[test].tolist()) for _, test in KKat(2).bol(X)]
-        assert kat_siniflari == [{0}, {1}], "her kat tek sınıflı — felaket"
+        assert kat_siniflari == [{0}, {1}], "her kat tek sınıflı, felaket"
 
 
 class TestTabakaliKKat:
@@ -188,7 +188,7 @@ class TestPDisarida:
         assert p1 == loo
 
     def test_guvenlik_siniri_patlamayi_engeller(self):
-        """C(50, 5) = 2 118 760 — sessizce çalışmaya başlamamalı."""
+        """C(50, 5) = 2 118 760, sessizce çalışmaya başlamamalı."""
         X = np.arange(50).reshape(-1, 1)
         with pytest.raises(ValueError, match="güvenlik sınırı"):
             list(PDisarida(5).bol(X))

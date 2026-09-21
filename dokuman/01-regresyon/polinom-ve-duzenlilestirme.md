@@ -5,7 +5,7 @@ Kaynak ders notları: `5-Polynomial_Regression.pdf`,
 
 ---
 
-## 1. Polinom regresyon — doğrusal modelin esnetilmesi
+## 1. Polinom regresyon: doğrusal modelin esnetilmesi
 
 Doğrusal regresyon `ŷ = β₀ + β₁x` bir doğru çizer. Veri eğrisel bir desen
 izliyorsa doğru asla yeterli olmaz. Polinom regresyon girdiyi yüksek dereceli
@@ -25,7 +25,7 @@ küçük kareler uygularsınız; çözüm yöntemi değişmez.
 |---|---|
 | 0 | Sabit tahmin (ortalama) |
 | 1 | Basit doğrusal regresyon |
-| 2–3 | Çoğu eğrisel ilişki için yeterli |
+| 2-3 | Çoğu eğrisel ilişki için yeterli |
 | Yüksek | Eğitim verisine kusursuz uyum, test verisinde felaket |
 
 Ders notunun sonuç bölümü doğru: *"Düşük dereceler genellikle yeterlidir"* ve
@@ -130,7 +130,7 @@ bölgesi). Kayıp fonksiyonunun eş-yükselti eğrileri bu bölgeye genellikle b
 bölgesi (daire) köşesizdir, bu yüzden tam sıfır çıkmaz.
 
 Sonuç: Lasso aynı anda hem düzenlileştirme hem **otomatik özellik seçimi**
-yapar. Ders notunun uyarısı da yerinde: *"çok fazla değişkeni sıfırlayabilir"* —
+yapar. Ders notunun uyarısı da yerinde: *"çok fazla değişkeni sıfırlayabilir"*:
 zayıf ama gerçek etkileri olan özellikler de elenebilir.
 
 **Korelasyonlu özelliklerde davranışı:** iki özellik neredeyse aynıysa Lasso

@@ -33,7 +33,7 @@ __all__ = [
 # Ortak dönüşümler
 # --------------------------------------------------------------------------
 def sigmoid(z):
-    """σ(z) = 1 / (1 + e^-z) — log-odds'u [0, 1] olasılığına sıkıştırır.
+    """σ(z) = 1 / (1 + e^-z), log-odds'u [0, 1] olasılığına sıkıştırır.
 
     Taşma güvenli biçimde hesaplanır: z çok negatifken naif formül exp(+800)
     üretip taşar, burada pozitif ve negatif dallar ayrı ele alınır.
@@ -48,7 +48,7 @@ def sigmoid(z):
 
 
 def log_odds(p, *, epsilon: float = 1e-15):
-    """logit(p) = log(p / (1-p)) — sigmoid'in tersi.
+    """logit(p) = log(p / (1-p)), sigmoid'in tersi.
 
     Gradient boosting ve XGBoost sınıflandırmada tahminleri bu ölçekte tutar:
     log-odds uzayında toplama yapmak, olasılık uzayında çarpmaya denk gelir ve
@@ -73,7 +73,7 @@ def log_loss_gradyan(y, p):
 def log_loss_hessian(p):
     """Log-loss'un 2. türevi: h = p·(1-p).
 
-    "Hatanın değişim hızı". p 0 veya 1'e yaklaştıkça sıfıra gider — model emin
+    "Hatanın değişim hızı". p 0 veya 1'e yaklaştıkça sıfıra gider, model emin
     olduğu yerlerde küçük adım atar. XGBoost'ta bu aynı zamanda `cover`dır.
     """
     p = np.asarray(p, dtype=float)
@@ -99,7 +99,7 @@ def adaboost_hata_orani(agirliklar, dogru_mu) -> float:
 
 
 def adaboost_agirlik_katsayisi(hata_orani: float, *, epsilon: float = 1e-12) -> float:
-    """α = ½ · ln((1 - ε) / ε) — zayıf öğrenicinin nihai oylamadaki ağırlığı.
+    """α = ½ · ln((1 - ε) / ε), zayıf öğrenicinin nihai oylamadaki ağırlığı.
 
     Davranış:
         ε = 0.5  -> α = 0     : yazı tura kadar iyi, hiç söz hakkı yok.
@@ -120,7 +120,7 @@ def adaboost_agirliklari_guncelle(agirliklar, dogru_mu, alfa: float, *,
 
     Yanlış sınıflanan örneklerin ağırlığı büyür, böylece bir sonraki zayıf
     öğrenici bu örneklere odaklanmak zorunda kalır. normalize=True ise toplam
-    1'e çekilir — ders notundaki "bin aralığı" mantığı bunu gerektirir.
+    1'e çekilir, ders notundaki "bin aralığı" mantığı bunu gerektirir.
     """
     agirliklar = np.asarray(agirliklar, dtype=float)
     dogru_mu = np.asarray(dogru_mu, dtype=bool)
@@ -177,7 +177,7 @@ def adaboost_nihai_skor(alfalar, tahminler):
 # Gradient boosting / XGBoost
 # --------------------------------------------------------------------------
 def gb_baslangic_degeri(y, *, gorev: str = "regresyon") -> float:
-    """F₀ — hiçbir özelliğe bakmadan yapılabilecek en iyi sabit tahmin.
+    """F₀, hiçbir özelliğe bakmadan yapılabilecek en iyi sabit tahmin.
 
     gorev="regresyon"      -> hedefin ortalaması (MSE'yi minimize eder)
     gorev="siniflandirma"  -> pozitif oranın log-odds'u (log-loss'u minimize eder)
@@ -213,7 +213,7 @@ def xgb_benzerlik(gradyan_toplami=None, hessian_toplami=None, *,
          Bu durumda Σh = Σ p(1-p) olarak hesaplanır.
 
     Sınıflandırmada h = p(1-p), regresyonda h = 1 olduğundan payda örnek
-    sayısı + λ olur — ders notundaki regresyon formülü (ΣR)²/N ile aynı şeydir
+    sayısı + λ olur, ders notundaki regresyon formülü (ΣR)²/N ile aynı şeydir
     (λ = 0 alındığında).
 
     λ (lambda) yükseldikçe skor küçülür: yaprak değerleri bastırılır, model
@@ -247,9 +247,9 @@ def xgb_kazanc(sol_benzerlik: float, sag_benzerlik: float, kok_benzerlik: float,
     """Gain = S_sol + S_sag - S_kök  (- γ).
 
     yarim_faktor:
-        False (varsayılan) — ders notundaki biçim. Bölmeleri sıralamak için
+        False (varsayılan), ders notundaki biçim. Bölmeleri sıralamak için
             yeterlidir çünkü ½ tüm adaylarda ortaktır.
-        True — XGBoost makalesindeki (Chen & Guestrin, 2016, Denklem 7) tam
+        True. XGBoost makalesindeki (Chen & Guestrin, 2016, Denklem 7) tam
             biçim: ½·[...] - γ. Gerçek kütüphanenin bastığı `gain` değeriyle
             karşılaştırma yapacaksan bunu kullan, yoksa sayılar 2 kat farklı çıkar.
 
@@ -294,7 +294,7 @@ def xgb_yaprak_degeri(artiklar=None, olasiliklar=None, *, gradyan_toplami=None,
 
 
 def xgb_cover(olasiliklar) -> float:
-    """Cover = Σ p(1-p) — bir düğümdeki "bilgi ağırlığı" (hessian toplamı).
+    """Cover = Σ p(1-p), bir düğümdeki "bilgi ağırlığı" (hessian toplamı).
 
     `min_child_weight` parametresi bunun alt sınırıdır. Cover küçükse düğümde
     ya çok az örnek vardır ya da model o örneklerden zaten emindir (p ≈ 0 veya

@@ -22,7 +22,7 @@ biridir: bir tahminin gerekçesi, kökten yaprağa giden yoldur.
 | Dallanma | Çok yollu (her kategori bir dal) | **Yalnızca ikili** |
 | Ölçüt | Entropi / kazanç oranı | Gini (varsayılan) |
 | Regresyon | Hayır | **Evet** |
-| scikit-learn | — | CART kullanır |
+| scikit-learn |: | CART kullanır |
 
 scikit-learn yalnızca CART uygular, yani her düğüm iki dala ayrılır.
 Kategorik bir değişken için `outlook ∈ {sunny, rainy}` gibi ikili bölmeler
@@ -90,14 +90,14 @@ bilgi_kazanci(y, maske=(mulakat == "Yüksek"))
 en_iyi_bolunme(X, y, olcut="entropi", ozellik_adlari=["gpa", "mulakat"])
 ```
 
-**Kazanç asla negatif olamaz** — saflık ölçütleri içbükey olduğu için. Bu, test
+**Kazanç asla negatif olamaz:** saflık ölçütleri içbükey olduğu için. Bu, test
 dosyasında rastgele verilerle doğrulanır.
 
-### Kazanç oranı (C4.5) — ham kazancın tuzağı
+### Kazanç oranı (C4.5): ham kazancın tuzağı
 
 Ham bilgi kazancı, **çok değerli kategorik özellikleri kayırır.** "Müşteri
 kimliği" gibi her satırda farklı olan bir sütun, her yaprağı tek örnekli yapar,
-entropiyi sıfırlar ve en yüksek kazancı alır — ama hiçbir şey öğretmez.
+entropiyi sıfırlar ve en yüksek kazancı alır, ama hiçbir şey öğretmez.
 
 ```
 SplitInfo = -Σ (|Sᵢ|/|S|) · log₂(|Sᵢ|/|S|)
@@ -109,7 +109,7 @@ Bölme bilgisine bölmek bu kayırmayı giderir. Test dosyasındaki
 
 ---
 
-## 4. Regresyon ağaçları — varyans azaltımı
+## 4. Regresyon ağaçları: varyans azaltımı
 
 Saflık ölçütleri sürekli hedefte anlamsızdır. Yerine:
 
@@ -118,7 +118,7 @@ Varyans azaltımı = Var(kök) - Σ (|Sᵢ|/|S|) · Var(Sᵢ)
 ```
 
 Bu, **ağırlıklı MSE azalışıyla aynı bölmeyi seçer** (test dosyasında
-doğrulanır). Yaprak tahmini, o yapraktaki hedeflerin **ortalamasıdır** — çünkü
+doğrulanır). Yaprak tahmini, o yapraktaki hedeflerin **ortalamasıdır:** çünkü
 ortalama, MSE'yi minimize eden sabittir.
 
 **Önemli:** ders notundaki hesaplar gibi bu implementasyon da **ddof=0**
@@ -150,19 +150,19 @@ Orta nokta kullanmak, eşiğin iki gözlem arasına düşmesini garanti eder.
 
 Budanmamış bir ağaç, her yaprakta tek örnek kalana kadar büyür: eğitim
 doğruluğu %100, test doğruluğu düşük. Bu, karar ağacının **yapısal**
-zayıflığıdır — bu yüzden tek başına nadiren kullanılır.
+zayıflığıdır, bu yüzden tek başına nadiren kullanılır.
 
-### Ön budama (pre-pruning) — büyümeyi sınırla
+### Ön budama (pre-pruning): büyümeyi sınırla
 
 | Parametre | Etkisi |
 |---|---|
-| `max_depth` | En etkili tek düğme. 3–10 tipik |
+| `max_depth` | En etkili tek düğme. 3-10 tipik |
 | `min_samples_split` | Bölmek için gereken en az örnek |
 | `min_samples_leaf` | Yaprakta kalması gereken en az örnek |
 | `max_features` | Her bölmede denenecek özellik sayısı |
 | `min_impurity_decrease` | Bölmenin sağlaması gereken en az kazanç |
 
-### Son budama (post-pruning) — büyüt, sonra kes
+### Son budama (post-pruning): büyüt, sonra kes
 
 scikit-learn'de `ccp_alpha` (cost-complexity pruning). Ağaç tam büyütülür,
 sonra "karmaşıklık başına getiri"si düşük dallar kesilir. Genellikle ön
@@ -201,7 +201,7 @@ for derinlik in (1, 3, 5, 10, None):
 - Tek başına aşırı öğrenmeye çok yatkın
 - Eksenlere paralel bölmeler yapar; çapraz bir karar sınırını merdiven basamağı
   gibi yaklaşık olarak temsil eder
-- Regresyonda **ekstrapolasyon yapamaz** — eğitim aralığı dışında sabit tahmin
+- Regresyonda **ekstrapolasyon yapamaz:** eğitim aralığı dışında sabit tahmin
   verir. Zaman serisi trendinde ölümcül bir sınırlamadır.
 - Özellik önemleri yanlıdır: yüksek kardinaliteli (çok farklı değerli)
   özellikler şişirilmiş önem alır. Permütasyon önemini tercih edin.

@@ -364,7 +364,7 @@ class TestEgriler:
         assert len(esikler) == len(kesinlikler) - 1
 
     def test_ortalama_kesinlik_taban_cizgisi_pozitif_oranidir(self):
-        """Rastgele skorlarda AP ≈ pozitif sınıf oranı — ROC-AUC ise 0.5 kalır."""
+        """Rastgele skorlarda AP ≈ pozitif sınıf oranı. ROC-AUC ise 0.5 kalır."""
         uretec = np.random.default_rng(0)
         gercek = np.zeros(2000, dtype=int)
         gercek[:100] = 1                      # %5 pozitif

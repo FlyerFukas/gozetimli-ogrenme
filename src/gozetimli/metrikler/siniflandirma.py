@@ -1,4 +1,4 @@
-"""Sınıflandırma metrikleri — karmaşıklık matrisinden eşik taramasına.
+"""Sınıflandırma metrikleri, karmaşıklık matrisinden eşik taramasına.
 
 Hepsi tek bir karmaşıklık matrisinden türetilir; böylece ikili ve çok sınıflı
 durum aynı kodu paylaşır. Ortalama stratejileri scikit-learn ile birebir aynı
@@ -8,7 +8,7 @@ fakat isimler ve hata mesajları Türkçedir.
 Ortalama stratejileri
 ---------------------
 ``"ikili"``      : yalnızca `pozitif_etiket` sınıfının skoru. Varsayılan.
-``"makro"``      : sınıf skorlarının düz ortalaması. Her sınıf eşit ağırlıkta —
+``"makro"``      : sınıf skorlarının düz ortalaması. Her sınıf eşit ağırlıkta:
                    azınlık sınıfı önemliyse bunu kullan.
 ``"agirlikli"``  : destek (support) ile ağırlıklı ortalama. Dengesiz veride
                    accuracy'ye yakınsar, yani azınlık sınıfını gizler.
@@ -94,10 +94,10 @@ def ikili_bilesenler(y_gercek, y_tahmin, *, pozitif_etiket=1):
     """İkili problemde (TN, FP, FN, TP) dörtlüsünü döndürür.
 
     Ders notlarındaki tanımlar:
-        TP — gerçek pozitif, tahmin pozitif
-        TN — gerçek negatif, tahmin negatif
-        FP — gerçek negatif, tahmin pozitif  (I. tip hata, "yanlış alarm")
-        FN — gerçek pozitif, tahmin negatif  (II. tip hata, "kaçırılan vaka")
+        TP, gerçek pozitif, tahmin pozitif
+        TN, gerçek negatif, tahmin negatif
+        FP, gerçek negatif, tahmin pozitif  (I. tip hata, "yanlış alarm")
+        FN, gerçek pozitif, tahmin negatif  (II. tip hata, "kaçırılan vaka")
     """
     gercek, tahmin = ciftleri_dogrula(y_gercek, y_tahmin)
     g_poz = gercek == pozitif_etiket
@@ -205,7 +205,7 @@ def dogruluk(y_gercek, y_tahmin, *, normalize: bool = True) -> float:
 
 def kesinlik(y_gercek, y_tahmin, *, etiketler=None, ortalama="ikili",
              pozitif_etiket=1, sifir_bolme=0.0):
-    """Precision = TP / (TP + FP) — "pozitif dediklerimin kaçı gerçekten pozitif?"
+    """Precision = TP / (TP + FP), "pozitif dediklerimin kaçı gerçekten pozitif?"
 
     FP'nin pahalı olduğu yerde yükseltilir: spam filtresinde gerçek postayı
     spam'e atmak, bir dolandırıcılık modelinde masum işlemi bloklamak gibi.
@@ -241,8 +241,8 @@ def f_beta_skoru(y_gercek, y_tahmin, *, beta=1.0, etiketler=None,
     """F-beta = (1 + b²)·P·R / (b²·P + R).
 
     beta = 1   precision ve recall eşit ağırlıkta (F1)
-    beta < 1   precision daha önemli (ör. F0.5 — spam filtresi)
-    beta > 1   recall daha önemli   (ör. F2  — hastalık taraması)
+    beta < 1   precision daha önemli (ör. F0.5: spam filtresi)
+    beta > 1   recall daha önemli   (ör. F2 : hastalık taraması)
 
     Not: makro F-beta, sınıf başına F-beta'ların ortalamasıdır; makro P ile
     makro R'den yeniden hesaplanan değer DEĞİLDİR (ikisi farklı sayılardır).
@@ -267,7 +267,7 @@ def dengeli_dogruluk(y_gercek, y_tahmin) -> float:
 
 
 def matthews_korelasyonu(y_gercek, y_tahmin) -> float:
-    """MCC — karmaşıklık matrisinin dört hücresini birden kullanan tek sayı.
+    """MCC, karmaşıklık matrisinin dört hücresini birden kullanan tek sayı.
 
     [-1, +1] aralığında: +1 kusursuz, 0 rastgele, -1 tam ters tahmin.
     Dengesiz veride F1'den daha dürüsttür çünkü TN'yi de hesaba katar.
@@ -302,7 +302,7 @@ def cohen_kappa(y_gercek, y_tahmin) -> float:
 
 
 def log_kaybi(y_gercek, olasiliklar, *, etiketler=None, epsilon=1e-15) -> float:
-    """Log-loss (çapraz entropi) — lojistik regresyonun optimize ettiği kayıp.
+    """Log-loss (çapraz entropi), lojistik regresyonun optimize ettiği kayıp.
 
     L = -(1/n) Σ Σ y_ik · log(p_ik)
 
@@ -394,7 +394,7 @@ def roc_auc(y_gercek, skorlar, *, pozitif_etiket=1) -> float:
 
     Yorum: rastgele seçilen bir pozitif örneğe, rastgele seçilen bir negatiften
     daha yüksek skor verme olasılığı. 0.5 = yazı tura. Sınıf dağılımından
-    etkilenmez — dengesiz veride bu hem avantaj (kararlı) hem tuzaktır
+    etkilenmez, dengesiz veride bu hem avantaj (kararlı) hem tuzaktır
     (çok dengesiz veride PR-AUC daha bilgilendiricidir).
     """
     fpr, tpr, _ = roc_egrisi(y_gercek, skorlar, pozitif_etiket=pozitif_etiket)
@@ -420,7 +420,7 @@ def kesinlik_duyarlilik_egrisi(y_gercek, skorlar, *, pozitif_etiket=1):
 
 
 def ortalama_kesinlik(y_gercek, skorlar, *, pozitif_etiket=1) -> float:
-    """Average Precision — PR eğrisinin basamak (step) toplamıyla alanı.
+    """Average Precision. PR eğrisinin basamak (step) toplamıyla alanı.
 
     AP = Σ (R_n - R_{n-1}) · P_n
 
@@ -491,14 +491,14 @@ def siniflandirma_raporu(y_gercek, y_tahmin, *, etiketler=None,
 
 def esik_tara(y_gercek, skorlar, *, metrik="f1", pozitif_etiket=1,
               en_az_duyarlilik=None, en_az_kesinlik=None):
-    """Karar eşiğini veriye göre seçer — 0.5 kutsal bir sayı değildir.
+    """Karar eşiğini veriye göre seçer, 0.5 kutsal bir sayı değildir.
 
     Sigmoid çıktısını 0.5'te kesmek yalnızca sınıflar dengeliyse ve FP ile FN
     aynı maliyetteyse mantıklıdır. Bu fonksiyon tüm eşikleri tarar ve seçilen
     metriği en yükseğe çıkaran eşiği döndürür.
 
     metrik: "f1", "f2", "f0.5", "youden" (TPR - FPR), "kesinlik", "duyarlilik"
-    en_az_duyarlilik / en_az_kesinlik: kısıt koyar — ör. "recall en az 0.90
+    en_az_duyarlilik / en_az_kesinlik: kısıt koyar, ör. "recall en az 0.90
     olsun, o kısıt altında precision'ı maksimize et".
 
     Dönüş: (en_iyi_esik, en_iyi_skor, tum_esikler, tum_skorlar)

@@ -1,4 +1,4 @@
-"""Uçtan uca sınıflandırma değerlendirmesi — doğru kurulmuş bir boru hattı.
+"""Uçtan uca sınıflandırma değerlendirmesi, doğru kurulmuş bir boru hattı.
 
 Gösterilen adımlar:
     1. Üçlü ayrım (eğitim / doğrulama / test)
@@ -107,7 +107,7 @@ def main() -> None:
           f"duyarlilik = {duyarlilik(y_dog, tahmin_kisit):.4f}")
 
     # ------------------------------------------------ nihai rapor (test seti)
-    baslik("5. NİHAİ RAPOR (test seti — ilk ve tek kullanım)")
+    baslik("5. NİHAİ RAPOR (test seti: ilk ve tek kullanım)")
     boru.fit(X_gecici, y_gecici)        # eğitim + doğrulama birlikte
     olasilik_test = boru.predict_proba(X_test)[:, 1]
     tahmin_test = (olasilik_test >= esik_f1).astype(int)

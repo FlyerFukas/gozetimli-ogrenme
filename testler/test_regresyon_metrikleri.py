@@ -98,7 +98,7 @@ class TestR2:
         assert r2(gercek, np.full(4, gercek.mean())) == pytest.approx(0.0)
 
     def test_ortalamadan_kotu_model_negatif(self, basit):
-        """R² negatif olabilir — test setinde bu gerçek bir uyarıdır."""
+        """R² negatif olabilir, test setinde bu gerçek bir uyarıdır."""
         gercek, _ = basit
         kotu = gercek[::-1]
         assert r2(gercek, kotu) < 0
@@ -196,7 +196,7 @@ class TestLogaritmikHatalar:
             mse(np.array([100.0]), np.array([200.0])) * 100**2)
 
     def test_msle_kucuk_degerlerde_log1p_sapmasi(self):
-        """log1p'teki +1, küçük değerlerde oransal denkliği bozar — bilinçli bir ödün.
+        """log1p'teki +1, küçük değerlerde oransal denkliği bozar, bilinçli bir ödün.
 
         y = 10 -> 20 için MSLE 0.418; y = 10 000 -> 20 000 için 0.480.
         +1 terimi olmasaydı sıfır hedefte logaritma tanımsız olurdu.

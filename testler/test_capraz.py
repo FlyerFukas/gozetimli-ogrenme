@@ -163,7 +163,7 @@ class TestVeriSizintisi:
         YANLIŞ: en iyi 10 özelliği TÜM veriden seç, sonra CV yap. Seçim
         aşaması test katlarının etiketlerini görmüştür; şans eseri uyan
         özellikler her katta da uyar.
-        DOĞRU: seçimi Pipeline'a koy — her katta yalnızca o katın eğitim
+        DOĞRU: seçimi Pipeline'a koy, her katta yalnızca o katın eğitim
         verisinden seçilsin.
         """
         uretec = np.random.default_rng(42)
@@ -191,7 +191,7 @@ class TestVeriSizintisi:
         """Ölçekleyiciyi tüm veriye uygulamak test katının ortalamasını sızdırır.
 
         Etkisi özellik seçimi kadar dramatik değildir (skor farkı küçüktür),
-        ama ölçekleme parametreleri test verisine bakarak hesaplanmış olur —
+        ama ölçekleme parametreleri test verisine bakarak hesaplanmış olur:
         bu, üretimde tekrarlanamayan bir avantajdır.
         """
         uretec = np.random.default_rng(7)

@@ -9,7 +9,7 @@ Bu dosya tanımları ve davranışları anlatır.
 
 ---
 
-## 1. Karmaşıklık matrisi — her şeyin kaynağı
+## 1. Karmaşıklık matrisi: her şeyin kaynağı
 
 Aşağıdaki metriklerin tamamı tek bir tablodan türer:
 
@@ -27,7 +27,7 @@ tn, fp, fn, tp = ikili_bilesenler(y_gercek, y_tahmin)
 
 **Satır = gerçek, sütun = tahmin.** Köşegen doğru tahminlerdir. Bu sırayı
 karıştırmak (özellikle başka bir kütüphaneden gelen matrisleri okurken) precision
-ile recall'u yer değiştirir — bu, sessiz ve maliyetli bir hatadır.
+ile recall'u yer değiştirir, bu, sessiz ve maliyetli bir hatadır.
 
 İsimlendirme mantığı: ikinci kelime **modelin ne dediği**, birincisi **doğru
 söyleyip söylemediği**. "False Positive" = model pozitif dedi, yanıldı.
@@ -63,8 +63,8 @@ değil" diyen model:
 
 ```python
 from gozetimli.metrikler.siniflandirma import dogruluk, dengeli_dogruluk
-dogruluk(y, t)          # 0.98  — gurur verici ve yalan
-dengeli_dogruluk(y, t)  # 0.50  — gerçek
+dogruluk(y, t)          # 0.98 , gurur verici ve yalan
+dengeli_dogruluk(y, t)  # 0.50 , gerçek
 ```
 
 ---
@@ -101,7 +101,7 @@ F1    = 2 · P · R / (P + R)
 F-beta = (1 + β²) · P · R / (β² · P + R)
 ```
 
-F1, precision ve recall'un **harmonik ortalamasıdır** — aritmetik değil. Fark
+F1, precision ve recall'un **harmonik ortalamasıdır:** aritmetik değil. Fark
 önemli: P = 1.00, R = 0.01 olan bir model
 - aritmetik ortalamada 0.505 (kabul edilebilir görünür)
 - F1'de 0.0198 (gerçeği söyler)
@@ -116,7 +116,7 @@ f_beta_skoru(y, t, beta=2.0)    # recall 2 kat önemli
 f_beta_skoru(y, t, beta=0.5)    # precision 2 kat önemli
 ```
 
-**Uyarı — makro F1:** sınıf başına F1'lerin ortalamasıdır. Makro P ile makro
+**Uyarı, makro F1:** sınıf başına F1'lerin ortalamasıdır. Makro P ile makro
 R'den F1 formülüyle yeniden hesaplamak farklı (ve yanlış) bir sayı verir.
 
 ---
@@ -142,7 +142,7 @@ gizliyordur. İkisini yan yana raporlayın.
 
 ---
 
-## 6. MCC ve Cohen's Kappa — tek sayıda dürüstlük
+## 6. MCC ve Cohen's Kappa: tek sayıda dürüstlük
 
 **Matthews korelasyon katsayısı**, karmaşıklık matrisinin dört hücresini birden
 kullanır ve [-1, +1] aralığında değer alır:
@@ -168,7 +168,7 @@ gelenekseldir, kanun değildir.
 
 ---
 
-## 7. Log-loss — olasılığın kalitesi
+## 7. Log-loss: olasılığın kalitesi
 
 ```
 L = -(1/n) Σ Σ y_ik · log(p_ik)
@@ -179,9 +179,9 @@ Sert etiketi değil **olasılığı** cezalandırır:
 
 | Gerçek | Tahmin | Katkı |
 |---|---|---|
-| 1 | 0.99 | 0.01 — neredeyse bedava |
+| 1 | 0.99 | 0.01: neredeyse bedava |
 | 1 | 0.51 | 0.67 |
-| 1 | 0.01 | 4.61 — çok pahalı |
+| 1 | 0.01 | 4.61: çok pahalı |
 
 Aynı accuracy'ye sahip iki model çok farklı log-loss alabilir. Modelin çıktısı
 bir eşikten geçirilip atılacaksa log-loss önemsizdir; ama olasılık bir karara
@@ -194,7 +194,7 @@ minimumlara takılabilir.
 
 ---
 
-## 8. ROC ve PR eğrileri — eşikten bağımsız değerlendirme
+## 8. ROC ve PR eğrileri: eşikten bağımsız değerlendirme
 
 Şimdiye kadarki metriklerin hepsi **bir eşik seçildikten sonra** hesaplanır.
 Eğriler tüm eşikleri birden değerlendirir.
@@ -279,6 +279,6 @@ hiçbirini göstermezdi.
 | `dengeli_dogruluk` | [0, 1] | evet (0.5 = şans) |
 | `matthews_korelasyonu` | [-1, 1] | evet (0 = şans) |
 | `cohen_kappa` | [-1, 1] | evet (0 = şans) |
-| `log_kaybi` | [0, ∞) | **hayır — düşük iyi** |
+| `log_kaybi` | [0, ∞) | **hayır: düşük iyi** |
 | `roc_auc` | [0, 1] | evet (0.5 = şans) |
 | `ortalama_kesinlik` | [0, 1] | evet (taban = pozitif oranı) |

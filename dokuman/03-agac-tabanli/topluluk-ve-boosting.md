@@ -17,7 +17,7 @@ Test: [`testler/test_boosting.py`](../../testler/test_boosting.py),
 
 | | **Bagging** | **Boosting** |
 |---|---|---|
-| Eğitim | **Paralel** — modeller bağımsız | **Ardışık** — her model öncekinin hatasına odaklanır |
+| Eğitim | **Paralel:** modeller bağımsız | **Ardışık:** her model öncekinin hatasına odaklanır |
 | Amaç | **Varyansı** azaltmak | **Bias'ı** azaltmak |
 | Temel öğrenici | Güçlü (derin ağaç) | Zayıf (sığ ağaç, stump) |
 | Birleştirme | Oylama / ortalama | Ağırlıklı toplam |
@@ -25,8 +25,8 @@ Test: [`testler/test_boosting.py`](../../testler/test_boosting.py),
 | Örnek | Random Forest | AdaBoost, GBM, XGBoost, LightGBM |
 
 **Sezgi:** Bagging, birbirinden bağımsız hata yapan uzmanların ortalamasını
-alır — hatalar birbirini götürür. Boosting, bir uzmanın yanlışını bir sonraki
-uzmana düzelttirir — her adımda kalan hata küçülür.
+alır, hatalar birbirini götürür. Boosting, bir uzmanın yanlışını bir sonraki
+uzmana düzelttirir, her adımda kalan hata küçülür.
 
 ---
 
@@ -57,18 +57,18 @@ Ders notundaki iki örnekleme:
   özellik alt kümesi denenir
 
 İkincisi kritiktir. Sadece bagging yapılsaydı, çok güçlü bir özellik tüm
-ağaçların köküne yerleşir ve ağaçlar birbirine benzerdi — ortalama almanın
+ağaçların köküne yerleşir ve ağaçlar birbirine benzerdi, ortalama almanın
 faydası azalırdı. Özellik örneklemesi ağaçları **birbirinden bağımsızlaştırır.**
 
 | Parametre | Tipik | Not |
 |---|---|---|
-| `n_estimators` | 100–500 | Artırmak zarar vermez, sadece yavaşlatır |
+| `n_estimators` | 100-500 | Artırmak zarar vermez, sadece yavaşlatır |
 | `max_features` | `"sqrt"` (sınıflandırma), 1/3 (regresyon) | Çeşitliliğin ana düğmesi |
 | `max_depth` | `None` | RF'de derin ağaç sorun değil |
-| `min_samples_leaf` | 1–5 | Gürültülü veride artırın |
+| `min_samples_leaf` | 1-5 | Gürültülü veride artırın |
 
 **Neden aşırı öğrenmiyor?** Ağaç sayısını artırmak varyansı azaltır, bias'ı
-değiştirmez. Daha fazla ağaç eklemek test hatasını **kötüleştirmez** — bir
+değiştirmez. Daha fazla ağaç eklemek test hatasını **kötüleştirmez:** bir
 platoya oturur. (Boosting'de durum tam tersidir.)
 
 **Artı:** kutudan çıktığı gibi güçlü, az ayar gerektirir, paralelleşir, OOB
@@ -101,14 +101,14 @@ from gozetimli.boosting import (adaboost_agirlik_katsayisi,
                                 adaboost_agirliklari_guncelle,
                                 adaboost_bin_araliklari, adaboost_nihai_skor)
 
-adaboost_agirlik_katsayisi(1/7)          # 0.8959 — ders notu örneği
+adaboost_agirlik_katsayisi(1/7)          # 0.8959, ders notu örneği
 ```
 
 ### α'nın davranışı
 
 | ε | α | Anlamı |
 |---|---|---|
-| 0.5 | **0** | Yazı tura kadar iyi — hiç söz hakkı yok |
+| 0.5 | **0** | Yazı tura kadar iyi: hiç söz hakkı yok |
 | < 0.5 | > 0 | Hata küçüldükçe söz hakkı hızla büyür |
 | > 0.5 | < 0 | Rastgeleden kötü; tahmin ters çevrilip kullanılır |
 | 0 | +∞ | Kırpılır (sayısal taşma) |
@@ -116,7 +116,7 @@ adaboost_agirlik_katsayisi(1/7)          # 0.8959 — ders notu örneği
 ### Ders notundaki "bin" mantığı
 
 Normalize ağırlıklardan kümülatif aralıklar kurulur; sonraki turda örnekler
-0–1 arası rastgele sayı çekilerek seçilir. Ağırlığı büyük örnek geniş aralık
+0-1 arası rastgele sayı çekilerek seçilir. Ağırlığı büyük örnek geniş aralık
 kaplar, dolayısıyla birden çok kez seçilir.
 
 Bu, ağırlıklı yeniden örnekleme (weighted resampling) uygulamasıdır. Alternatif
@@ -128,7 +128,7 @@ doğrulanmıştır: α₁ = 0.895, ham ağırlıklar 0.058/0.354, normalize 0.08
 α₂ = 0.552, F(x) = 1.447.
 
 **Zayıflığı:** üstel kayıp kullandığı için gürültülü etiketlere ve aykırı
-değerlere **çok duyarlıdır** — yanlış etiketli bir örneğin ağırlığı üstel
+değerlere **çok duyarlıdır:** yanlış etiketli bir örneğin ağırlığı üstel
 büyür ve model ona takılır. Bu yüzden pratikte gradient boosting tercih edilir.
 
 ---
@@ -152,7 +152,7 @@ adımlar, her ağacın yalnızca bir miktar düzeltme yapmasını sağlar; bu da
 öğrenmeyi geciktirir ve daha iyi genelleme verir.
 
 **η ile ağaç sayısı ters orantılıdır:** η'yı yarıya indirirseniz yaklaşık iki
-kat ağaç gerekir. Tipik: η = 0.05–0.1, `n_estimators` = 100–1000, erken
+kat ağaç gerekir. Tipik: η = 0.05-0.1, `n_estimators` = 100-1000, erken
 durdurma ile.
 
 ### Sınıflandırma
@@ -174,7 +174,7 @@ gb_baslangic_degeri([0, 0, 1, 1, 1], gorev="siniflandirma")   # log(3/2) = 0.405
 ```
 
 **Önemli özellik:** F₀ log-odds seçildiğinde `Σ(y - p) = 0` olur. Bu bir
-tesadüf değil, log-loss'un birinci derece optimallik koşuludur — ve XGBoost'ta
+tesadüf değil, log-loss'un birinci derece optimallik koşuludur, ve XGBoost'ta
 kök similarity'sinin neden sıfır olduğunu açıklar.
 
 ---
@@ -189,8 +189,8 @@ kullanımıdır.**
 
 Log-loss için:
 ```
-g = p - y          (1. türev — hatanın yönü ve büyüklüğü)
-h = p(1-p)         (2. türev — hatanın değişim hızı)
+g = p - y          (1. türev: hatanın yönü ve büyüklüğü)
+h = p(1-p)         (2. türev: hatanın değişim hızı)
 ```
 
 Güncelleme `-g/(h+λ)` biçimindedir. Newton yöntemine benzer: eğrilik bilgisi
@@ -207,7 +207,7 @@ Gain = S_sol + S_sağ - S_kök   (- γ)
 `λ` (L2 düzenlileştirme) paydayı büyütür → skorları ve yaprak değerlerini
 bastırır. `λ = 0` klasik gradient boosting'e döner.
 
-`γ` bir bölmenin yapılabilmesi için gereken **en az kazançtır** — ön budama
+`γ` bir bölmenin yapılabilmesi için gereken **en az kazançtır:** ön budama
 mekanizması.
 
 ```python
@@ -224,14 +224,14 @@ vardır (bölmenin kalitesini ölçer, işaret önemsiz), yaprak değerinde yokt
 
 **Cover** = Σ p(1-p) = hessian toplamı. Bir düğümün "bilgi ağırlığı".
 `min_child_weight` bunun alt sınırıdır: cover küçükse ya çok az örnek vardır
-ya da model zaten emindir — iki durumda da bölmeye devam etmek gürültü
+ya da model zaten emindir, iki durumda da bölmeye devam etmek gürültü
 öğrenmektir.
 
 > **Ders notundaki hata.** Sağ düğüm similarity'si 0.702 verilmiş; notun kendi
 > ara değerleriyle bile 1.144²/1.816 = 0.7207 çıkıyor (yuvarlanmamış: 0.7191).
 > Buna bağlı olarak Gain de 1.511 değil 1.5292. Sol düğüm ve yaprak değerleri
 > doğru; hata bölme kararını değiştirmiyor. Ayrıca S_kök = 0 sonucu "kök
-> düğümde tek grup var" diye gerekçelendirilmiş — doğru sebep artıkların
+> düğümde tek grup var" diye gerekçelendirilmiş, doğru sebep artıkların
 > toplamının sıfır olmasıdır. [KAYNAK-NOTLARI.md](../KAYNAK-NOTLARI.md)
 
 > **Formül farkı.** Ders notu `Gain = S_sol + S_sağ - S_kök` veriyor. XGBoost
@@ -244,11 +244,11 @@ ya da model zaten emindir — iki durumda da bölmeye devam etmek gürültü
 
 | Parametre | Rolü |
 |---|---|
-| `learning_rate` (η) | Adım boyu. 0.01–0.3 |
-| `n_estimators` | Tur sayısı — erken durdurma ile birlikte |
-| `max_depth` | 3–8. Boosting'de derin ağaç gerekmez |
-| `reg_lambda` (λ) | L2 — yaprak değerlerini bastırır |
-| `reg_alpha` (α) | L1 — yaprakları sıfırlar |
+| `learning_rate` (η) | Adım boyu. 0.01-0.3 |
+| `n_estimators` | Tur sayısı: erken durdurma ile birlikte |
+| `max_depth` | 3-8. Boosting'de derin ağaç gerekmez |
+| `reg_lambda` (λ) | L2: yaprak değerlerini bastırır |
+| `reg_alpha` (α) | L1: yaprakları sıfırlar |
 | `gamma` (γ) | En az bölme kazancı |
 | `min_child_weight` | En az cover |
 | `subsample` | Satır örneklemesi (0.8 tipik) |
@@ -264,7 +264,7 @@ Microsoft'un uygulaması. Üç yapısal farkı var:
 
 | | XGBoost (varsayılan) | LightGBM |
 |---|---|---|
-| Büyüme | **Level-wise** — her seviye dengeli | **Leaf-wise** — en çok kazanç veren yaprak |
+| Büyüme | **Level-wise:** her seviye dengeli | **Leaf-wise:** en çok kazanç veren yaprak |
 | Ağaç şekli | Simetrik | Asimetrik, derin dallar |
 | Aynı yaprak sayısında hata | Daha yüksek | **Daha düşük** |
 | Aşırı öğrenme riski | Daha düşük | **Daha yüksek** |
@@ -278,7 +278,7 @@ ile sınırlanmalıdır. Kural: `num_leaves < 2^max_depth`.
 Sürekli değişkenler önce **bin**'lere ayrılır (varsayılan 255). Tüm olası
 eşikler yerine bin sınırları denenir. Sonuç: bellek ve hız kazancı, ihmal
 edilebilir doğruluk kaybı. (XGBoost'ta bu `tree_method="hist"` ile açılır ve
-modern sürümlerde varsayılandır — yani bu fark eskisi kadar belirgin değil.)
+modern sürümlerde varsayılandır, yani bu fark eskisi kadar belirgin değil.)
 
 ### Kategorik destek
 
@@ -296,7 +296,7 @@ aşırı öğrenmeye açıktır; `cat_smooth` ve `min_data_per_group` ayarlanmal
 
 ```
 Hızlı ve güvenilir bir baz çizgisi mi istiyorsun?
-└── Random Forest — az ayar, iyi sonuç, aşırı öğrenmeye dirençli
+└── Random Forest, az ayar, iyi sonuç, aşırı öğrenmeye dirençli
 
 Tablosal veride en yüksek doğruluk mu?
 ├── Veri < ~100k satır  → XGBoost
@@ -306,12 +306,12 @@ Tablosal veride en yüksek doğruluk mu?
 └── CatBoost (ders notlarında yok, ama bu alanda güçlü)
 
 Yorumlanabilirlik zorunlu mu?
-└── Tek karar ağacı veya lojistik regresyon — topluluk bunu veremez
+└── Tek karar ağacı veya lojistik regresyon, topluluk bunu veremez
 ```
 
 **Gerçekçi bir not:** Kaggle'da ve pratikte tablosal veride gradient boosting
 aileleri hâlâ derin öğrenmeyi geçer. Ama iyi ayarlanmış bir Random Forest ile
-iyi ayarlanmış bir XGBoost arasındaki fark genellikle birkaç puandır —
+iyi ayarlanmış bir XGBoost arasındaki fark genellikle birkaç puandır:
 veri kalitesi ve özellik mühendisliği, model seçiminden daha çok fark yaratır.
 
 ---
@@ -329,7 +329,7 @@ model.fit(X_egitim, y_egitim,
 ```
 
 Erken durdurma için kullanılan set, nihai skorun hesaplandığı test seti
-**olmamalıdır** — yoksa sızıntı olur.
+**olmamalıdır:** yoksa sızıntı olur.
 Bkz. [veri-sizintisi.md](../04-degerlendirme/veri-sizintisi.md).
 
 ---

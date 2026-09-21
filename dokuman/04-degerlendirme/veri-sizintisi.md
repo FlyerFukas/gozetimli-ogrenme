@@ -1,4 +1,4 @@
-# Veri sızıntısı — skorları sahte yapan hatalar
+# Veri sızıntısı: skorları sahte yapan hatalar
 
 Veri sızıntısı (data leakage), modelin **eğitim sırasında görmemesi gereken
 bilgiye** erişmesidir. Sonucu her zaman aynıdır: çapraz doğrulama skoru harika
@@ -10,7 +10,7 @@ Bu dosyadaki üç örneğin tamamı bu depoda **ölçülür**; sayılar
 
 ---
 
-## 1. Özellik seçimi sızıntısı — en sinsisi
+## 1. Özellik seçimi sızıntısı: en sinsisi
 
 **Kurulum:** 200 örnek, 2000 tamamen rastgele özellik, tamamen rastgele etiket.
 Veride **hiçbir gerçek sinyal yok.** Dürüst skor %50 olmalı.
@@ -43,7 +43,7 @@ büyükse bu riski ciddiye alın.
 
 ---
 
-## 2. Grup sızıntısı — en sık yapılanı
+## 2. Grup sızıntısı: en sık yapılanı
 
 **Kurulum:** 20 denek, her birinden 10 neredeyse aynı ölçüm (toplam 200 satır).
 Denek kimliği hedefi belirliyor. Gerçek soru: **görülmemiş bir denekte** model
@@ -77,7 +77,7 @@ dolaylı olarak öğrenebiliyorsa, grup bazlı bölme zorunludur.
 
 ---
 
-## 3. Zaman sızıntısı — en kolay fark edileni, yine de yapılanı
+## 3. Zaman sızıntısı: en kolay fark edileni, yine de yapılanı
 
 **Kurulum:** 200 adımlık bir seri. 100. adımda **rejim değişiyor**: ilişki
 tersine dönüyor. Gerçek bir model bunu önceden bilemez.
@@ -89,7 +89,7 @@ tersine dönüyor. Gerçek bir model bunu önceden bilemez.
 
 K-Fold, doğrusal modelin rejim değişimini tamamen kaçırdığını **gizliyor.**
 Dürüst değerlendirme, modelin ortalamayı söylemekten çok daha kötü olduğunu
-söylüyor — ki gerçek budur.
+söylüyor, ki gerçek budur.
 
 ```python
 from gozetimli.dogrulama.bolme import ZamanSerisiBolme
@@ -101,14 +101,14 @@ Zaman serisinde karıştırmak, **geleceği görüp geçmişi tahmin etmektir.**
 
 ---
 
-## 4. Ölçekleme ve doldurma sızıntısı — küçük ama gerçek
+## 4. Ölçekleme ve doldurma sızıntısı: küçük ama gerçek
 
-`StandardScaler`, `SimpleImputer`, `PCA`, hedef kodlama (target encoding) —
+`StandardScaler`, `SimpleImputer`, `PCA`, hedef kodlama (target encoding):
 hepsi **veriden öğrenir**. Tüm veriye uygulanırsa test katının ortalaması,
 varyansı veya hedef dağılımı eğitime karışır.
 
 Etkisi özellik seçimi kadar dramatik değildir (genellikle birkaç ondalık),
-ama parametreler test verisine bakarak hesaplanmış olur — üretimde
+ama parametreler test verisine bakarak hesaplanmış olur, üretimde
 tekrarlanamayan bir avantaj.
 
 ```python
@@ -125,14 +125,14 @@ sızdırır; kat içinde bile out-of-fold kodlama gerekir.
 
 ---
 
-## 5. Kaynağında sızıntı — model kurulmadan önce
+## 5. Kaynağında sızıntı: model kurulmadan önce
 
 Yukarıdakiler yöntem hatalarıdır. Bir de **veri toplama** kaynaklı olanlar var
 ve bunlar Pipeline ile çözülmez:
 
 | Sızıntı | Örnek |
 |---|---|
-| **Geleceğe ait sütun** | "Toplam sipariş tutarı" ile iptal tahmini — tutar iptalden sonra güncelleniyor |
+| **Geleceğe ait sütun** | "Toplam sipariş tutarı" ile iptal tahmini: tutar iptalden sonra güncelleniyor |
 | **Hedefin vekili (proxy)** | Hastalık tahmininde "reçete edilen ilaç" sütunu |
 | **Sonradan güncellenen alan** | "Son durum", "kapanış tarihi" gibi olay sonrası dolan sütunlar |
 | **Tekrarlanan satırlar** | Aynı kaydın kopyası hem eğitimde hem testte |
@@ -152,7 +152,7 @@ ve bunlar Pipeline ile çözülmez:
 
 Bir CV kurulumunu teslim etmeden önce:
 
-- [ ] Ölçekleme, doldurma, kodlama, özellik seçimi — hepsi Pipeline içinde mi?
+- [ ] Ölçekleme, doldurma, kodlama, özellik seçimi: hepsi Pipeline içinde mi?
 - [ ] Veride tekrar eden bir varlık (kişi/mağaza/belge) var mı? Varsa `GrupKKat`.
 - [ ] Veri zamana bağlı mı? Öyleyse `ZamanSerisiBolme`, gerekiyorsa `bosluk`.
 - [ ] Sınıflandırmada `TabakaliKKat` kullanıldı mı?

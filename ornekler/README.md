@@ -17,7 +17,7 @@ python ornekler/03-sizinti-karsilastirmasi.py
 
 ---
 
-## 01 — ne öğretiyor?
+## 01: ne öğretiyor?
 
 Eşik seçiminin gerçek etkisi bu betikte görünür. Aynı model, aynı veri:
 
@@ -29,7 +29,7 @@ Eşik seçiminin gerçek etkisi bu betikte görünür. Aynı model, aynı veri:
 Ayrıca bir iş kısıtının nasıl uygulandığını gösterir: "duyarlılık en az %90
 olsun, o kısıt altında kesinliği maksimize et."
 
-## 02 — ne buluyor?
+## 02: ne buluyor?
 
 Ders notlarındaki 25+ el hesabının çoğu tutuyor; ikisi tutmuyor ve betik
 bunları açıkça işaretliyor:
@@ -40,7 +40,7 @@ bunları açıkça işaretliyor:
 
 Ayrıntı: [dokuman/KAYNAK-NOTLARI.md](../dokuman/KAYNAK-NOTLARI.md)
 
-## 03 — ne ölçüyor?
+## 03: ne ölçüyor?
 
 | Senaryo | Yanlış | Doğru | Sahte kazanç |
 |---|---|---|---|
@@ -48,5 +48,5 @@ Ayrıntı: [dokuman/KAYNAK-NOTLARI.md](../dokuman/KAYNAK-NOTLARI.md)
 | Satır bazlı CV (gruplu veri) | 1.0000 | 0.5400 | +0.4600 |
 | Zaman serisinde K-Fold (R²) | -0.04 | -22.45 | +22.41 |
 
-İlk satırda etiketler **tamamen rastgeledir** — yani %73 doğruluk tümüyle
+İlk satırda etiketler **tamamen rastgeledir:** yani %73 doğruluk tümüyle
 sızıntıdan geliyor.

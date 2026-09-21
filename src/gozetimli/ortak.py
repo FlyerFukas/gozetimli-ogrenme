@@ -68,7 +68,7 @@ def guvenli_bolme(pay, payda, *, sifir_bolme: float = 0.0):
 def etiketleri_bul(y_gercek, y_tahmin=None, etiketler=None) -> np.ndarray:
     """Kullanılacak sınıf etiketlerini belirler ve sıralı döndürür.
 
-    `etiketler` verilmişse ona saygı duyulur (sıra korunur) — karmaşıklık
+    `etiketler` verilmişse ona saygı duyulur (sıra korunur), karmaşıklık
     matrisinin satır/sütun sırasını kullanıcının seçebilmesi için.
     """
     if etiketler is not None:

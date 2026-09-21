@@ -26,7 +26,7 @@ env/
 Thumbs.db
 desktop.ini
 
-# Üçüncü taraf ders materyali — TELİFLİ, DEPOYA GİRMEZ
+# Üçüncü taraf ders materyali: TELİFLİ, DEPOYA GİRMEZ
 # (bkz. COMMERCIAL.md bölüm 7)
 *.pdf
 ders-notlari/

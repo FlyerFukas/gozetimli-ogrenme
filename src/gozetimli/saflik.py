@@ -57,7 +57,7 @@ def gini(y) -> float:
     olasılığı". Aralık: [0, 1 - 1/k]. İki sınıfta en fazla 0.5.
 
     CART'ın varsayılan ölçütüdür. Logaritma içermediği için entropiden hızlıdır
-    ve pratikte neredeyse hep aynı ağacı üretir — ders notunun "genelde benzer
+    ve pratikte neredeyse hep aynı ağacı üretir, ders notunun "genelde benzer
     sonuçlar verir" ifadesi doğrudur.
     """
     y = np.asarray(y).ravel()
@@ -83,7 +83,7 @@ def siniflandirma_hatasi(y) -> float:
 
 
 def varyans(y) -> float:
-    """Popülasyon varyansı (ddof=0) — regresyon ağacının saflıksızlık ölçütü.
+    """Popülasyon varyansı (ddof=0), regresyon ağacının saflıksızlık ölçütü.
 
     Ders notundaki hesap da ddof=0 kullanır: kareler toplamı / n.
     DİKKAT: pandas'ın `.var()` varsayılanı ddof=1'dir ve küçük yapraklarda
@@ -115,7 +115,7 @@ def _olcut_al(olcut):
 
 
 def agirlikli_saflik(alt_kumeler, *, olcut="entropi") -> float:
-    """Σ (|S_i| / |S|) · saflık(S_i) — bölme sonrası ağırlıklı saflıksızlık.
+    """Σ (|S_i| / |S|) · saflık(S_i), bölme sonrası ağırlıklı saflıksızlık.
 
     Ağırlık şart: 1 örnekli saf bir yaprak ile 100 örnekli saf bir yaprak
     aynı değerde sayılamaz.
@@ -132,8 +132,8 @@ def bilgi_kazanci(y, alt_kumeler=None, *, maske=None, olcut="entropi") -> float:
     """Bilgi kazancı = saflık(kök) - Σ ağırlık_i · saflık(çocuk_i).
 
     İki kullanım biçimi:
-        bilgi_kazanci(y, [sol_y, sag_y])          — alt kümeler doğrudan
-        bilgi_kazanci(y, maske=bool_dizi)         — ikili bölme maskesiyle
+        bilgi_kazanci(y, [sol_y, sag_y])         , alt kümeler doğrudan
+        bilgi_kazanci(y, maske=bool_dizi)        , ikili bölme maskesiyle
 
     Ders notundaki örnek (7 örnek: 4 Onay, 3 Red; "Interview Score = Yüksek"
     bölmesi) 0.521 bit kazanç verir ve `testler/test_ders_ornekleri.py`
@@ -158,7 +158,7 @@ def kazanc_orani(y, alt_kumeler=None, *, maske=None) -> float:
 
     Neden var? Ham bilgi kazancı, çok değerli kategorik özellikleri kayırır:
     "müşteri kimliği" gibi her satırda farklı olan bir sütun, her yaprağı tek
-    örnekli yapar, entropiyi sıfırlar ve en yüksek kazancı alır — ama hiçbir
+    örnekli yapar, entropiyi sıfırlar ve en yüksek kazancı alır, ama hiçbir
     şey öğretmez. Bölme bilgisine bölmek bu kayırmayı giderir.
 
     SplitInfo = -Σ (|S_i|/|S|) · log2(|S_i|/|S|)

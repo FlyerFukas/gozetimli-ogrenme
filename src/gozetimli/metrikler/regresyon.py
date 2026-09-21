@@ -1,7 +1,7 @@
 """Regresyon metrikleri.
 
 KAYNAK NOTU: Atıl Samancıoğlu'nun elimizdeki ders notlarında (5-19 arası PDF)
-regresyon metrikleri ayrı bir başlık olarak İŞLENMEMİŞTİR — MSE yalnızca
+regresyon metrikleri ayrı bir başlık olarak İŞLENMEMİŞTİR. MSE yalnızca
 doğrusal/Ridge/Lasso maliyet fonksiyonunun içinde geçer, varyans azaltımı ise
 karar ağacı bölme ölçütü olarak anlatılır. Elimizdeki klasörde 1-4 numaralı
 PDF'ler eksik; regresyon metriklerinin orada anlatılmış olması muhtemel.
@@ -37,7 +37,7 @@ def mse(y_gercek, y_tahmin, *, ornek_agirliklari=None) -> float:
 
     Büyük hataları karesiyle cezalandırır, yani aykırı değerlere duyarlıdır.
     Doğrusal regresyonun ve karar ağacı regresörünün varsayılan kaybıdır.
-    Birimi hedefin birimi DEĞİLDİR (kare birimdir) — raporlarken RMSE tercih et.
+    Birimi hedefin birimi DEĞİLDİR (kare birimdir), raporlarken RMSE tercih et.
     """
     gercek, tahmin = ciftleri_dogrula(y_gercek, y_tahmin, dtype=float)
     kareler = (gercek - tahmin) ** 2
@@ -59,7 +59,7 @@ def mae(y_gercek, y_tahmin, *, ornek_agirliklari=None) -> float:
     """Ortalama Mutlak Hata = (1/n) Σ |y - ŷ|.
 
     Aykırı değerlere MSE'den dayanıklıdır (hatayı karesine almaz). MAE'yi
-    minimize eden sabit tahmin medyandır; MSE'yi minimize eden ortalamadır —
+    minimize eden sabit tahmin medyandır; MSE'yi minimize eden ortalamadır:
     ikisi arasındaki seçim aslında "hangi merkezi eğilim doğru?" sorusudur.
     """
     gercek, tahmin = ciftleri_dogrula(y_gercek, y_tahmin, dtype=float)
@@ -83,7 +83,7 @@ def mape(y_gercek, y_tahmin, *, epsilon: float = 1e-10) -> float:
     sevdiği metriktir ama üç tuzağı vardır:
       1. y = 0 olan örneklerde tanımsızdır (burada epsilon ile korunur).
       2. Asimetriktir: düşük tahmin etmeyi, yüksek tahmin etmekten daha az
-         cezalandırır — modelin sistematik olarak düşük tahmin etmesini teşvik eder.
+         cezalandırır, modelin sistematik olarak düşük tahmin etmesini teşvik eder.
       3. Küçük gerçek değerlerde patlar (y=1, ŷ=2 → %100 hata).
     Talep tahmininde sıfıra yakın değerler varsa `smape` veya `mae` kullan.
     """

@@ -5,7 +5,7 @@ Bu dosyanın iki işi var:
 1. Kütüphanenin formüllerinin, bağımsız bir kaynağın (ders notu) elle yaptığı
    hesapla aynı sonucu verdiğini göstermek.
 2. Ders notundaki hataları AÇIKÇA belgelemek. Bir el hesabı tutmuyorsa test
-   "beklenen değer yanlış" diye işaretlenir ve doğru değer yazılır — sessizce
+   "beklenen değer yanlış" diye işaretlenir ve doğru değer yazılır, sessizce
    tolerans büyütülmez.
 
 Toleranslar notun kendi yuvarlamasına göre seçilmiştir: notta 3 basamak
@@ -35,7 +35,7 @@ pytestmark = pytest.mark.ders
 
 
 # ==========================================================================
-# 13 — Karar Ağaçları (sınıflandırma)
+# 13: Karar Ağaçları (sınıflandırma)
 # ==========================================================================
 class TestKararAgaciSiniflandirma:
     """13-Decision_Tree_Algorithms.pdf, kredi onay veri seti (7 satır)."""
@@ -89,7 +89,7 @@ class TestKararAgaciSiniflandirma:
 
 
 # ==========================================================================
-# 13 — Karar Ağacı Regresörü (burs verisi) — NOTTA HATA VAR
+# 13: Karar Ağacı Regresörü (burs verisi), NOTTA HATA VAR
 # ==========================================================================
 class TestKararAgaciRegresyon:
     """13-Decision_Tree_Algorithms.pdf, GPA -> burs miktarı (7 satır)."""
@@ -105,7 +105,7 @@ class TestKararAgaciRegresyon:
         assert varyans(burs[~maske]) == pytest.approx(44.19, abs=5e-3)
 
     def test_agirlikli_varyans_notla_uyuyor(self):
-        """3/7·11.556 + 4/7·44.188 ≈ 30.20 — not 30.19 diyor, uyuyor."""
+        """3/7·11.556 + 4/7·44.188 ≈ 30.20, not 30.19 diyor, uyuyor."""
         veri = burs_regresyon()
         gpa, burs = veri.X.ravel(), veri.y
         maske = gpa <= 3.1
@@ -174,7 +174,7 @@ class TestKararAgaciRegresyon:
 
 
 # ==========================================================================
-# 12 — KNN
+# 12: KNN
 # ==========================================================================
 class TestKNN:
     """12-KNN_Algorithm.pdf, boy/kilo -> sporcu (6 satır), test (168, 66)."""
@@ -207,7 +207,7 @@ class TestKNN:
         assert int(np.bincount(veri.y[en_yakin_3]).argmax()) == 1
 
     def test_manhattan_farkli_siralama_verebilir(self):
-        """Mesafe ölçüsü seçimi komşu kümesini değiştirebilir — ölçek/ölçü kritiktir."""
+        """Mesafe ölçüsü seçimi komşu kümesini değiştirebilir, ölçek/ölçü kritiktir."""
         veri = knn_sporcu()
         yeni = np.array([168.0, 66.0])
         oklid = np.argsort(np.sqrt(((veri.X - yeni) ** 2).sum(axis=1)))[:3]
@@ -267,7 +267,7 @@ class TestKNN:
 
 
 # ==========================================================================
-# 11 — Naive Bayes
+# 11: Naive Bayes
 # ==========================================================================
 class TestNaiveBayes:
     """11-Naive_Bayes_Theorem_ML_Algorithm.pdf."""
@@ -333,7 +333,7 @@ class TestNaiveBayes:
 
 
 # ==========================================================================
-# 16 — AdaBoost
+# 16: AdaBoost
 # ==========================================================================
 class TestAdaBoost:
     """16-Adaboost_Algorithm.pdf, 7 satırlık kredi onay verisi."""
@@ -363,7 +363,7 @@ class TestAdaBoost:
         assert yeni[5] > yeni[0] * 5, "Yanlış örneğin ağırlığı belirgin artmalı"
 
     def test_bin_araliklari(self):
-        """Yanlış örnek (ID 6) 0.415-0.919 aralığını kaplar — seçilme şansı yüksek."""
+        """Yanlış örnek (ID 6) 0.415-0.919 aralığını kaplar, seçilme şansı yüksek."""
         w = np.full(7, 1 / 7)
         dogru = np.array([True, True, True, True, True, False, True])
         araliklar = adaboost_bin_araliklari(
@@ -405,7 +405,7 @@ class TestAdaBoost:
 
 
 # ==========================================================================
-# 17 — Gradient Boosting
+# 17: Gradient Boosting
 # ==========================================================================
 class TestGradientBoosting:
     """17-Gradient_Boosting_Algorithm.pdf."""
@@ -458,7 +458,7 @@ class TestGradientBoosting:
 
 
 # ==========================================================================
-# 18 — XGBoost — NOTTA HATA VAR
+# 18: XGBoost, NOTTA HATA VAR
 # ==========================================================================
 class TestXGBoostSiniflandirma:
     """18-XGBoost_Algorithm.pdf, 7 satır, 5 pozitif / 2 negatif, λ = 1."""
@@ -486,7 +486,7 @@ class TestXGBoostSiniflandirma:
         assert artiklar[2] == pytest.approx(+0.286, abs=5e-4)
 
     def test_sol_benzerlik_notla_uyuyor(self):
-        """S_sol = (-1.1429)² / (0.6122 + 1) ≈ 0.810. Not 0.809 — uyuyor."""
+        """S_sol = (-1.1429)² / (0.6122 + 1) ≈ 0.810. Not 0.809, uyuyor."""
         veri, _, p0 = self._baslangic()
         sol = (veri.y - p0)[:3]
         assert float(sol.sum()) == pytest.approx(-1.142, abs=1e-3)
@@ -519,7 +519,7 @@ class TestXGBoostSiniflandirma:
         assert "xgboost_sag_benzerlik" in KAYNAK_NOTLARI
 
     def test_kok_benzerlik_sifirdir_ama_gerekce_farkli(self):
-        """S_kök = 0, çünkü artıkların toplamı sıfır — "tek grup" olduğu için değil.
+        """S_kök = 0, çünkü artıkların toplamı sıfır, "tek grup" olduğu için değil.
 
         F₀ log-odds seçildiğinde Σ(y - p) = 0 olması bir tesadüf değil,
         log-loss'un birinci derece optimallik koşuludur.
@@ -562,7 +562,7 @@ class TestXGBoostSiniflandirma:
         assert float(sigmoid(f1)) == pytest.approx(0.699, abs=1e-3)
 
     def test_lambda_yaprak_degerini_bastirir(self):
-        """λ arttıkça |V| küçülür — ders notundaki R=2, Σh=1 örneği.
+        """λ arttıkça |V| küçülür, ders notundaki R=2, Σh=1 örneği.
 
         λ = 1  -> V = 2/2   = 1.0
         λ = 10 -> V = 2/11 ≈ 0.18

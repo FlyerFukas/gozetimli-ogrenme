@@ -1,11 +1,11 @@
 """Gözetimli öğrenme referans kütüphanesi.
 
 Dört parça:
-    gozetimli.metrikler   — sınıflandırma ve regresyon metrikleri
-    gozetimli.dogrulama   — veri bölme stratejileri ve çapraz doğrulama
-    gozetimli.saflik      — karar ağacı bölme ölçütleri
-    gozetimli.boosting    — AdaBoost / gradient boosting / XGBoost hesapları
-    gozetimli.veri        — ders notlarındaki örnek veri setleri
+    gozetimli.metrikler  , sınıflandırma ve regresyon metrikleri
+    gozetimli.dogrulama  , veri bölme stratejileri ve çapraz doğrulama
+    gozetimli.saflik     , karar ağacı bölme ölçütleri
+    gozetimli.boosting   . AdaBoost / gradient boosting / XGBoost hesapları
+    gozetimli.veri       , ders notlarındaki örnek veri setleri
 
 Hızlı başlangıç:
 

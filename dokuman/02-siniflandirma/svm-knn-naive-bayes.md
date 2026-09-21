@@ -8,7 +8,7 @@ Kaynak ders notları: `10-Support_Vector_Machines.pdf`, `12-KNN_Algorithm.pdf`,
 
 ---
 
-# Bölüm 1 — Support Vector Machines
+# Bölüm 1: Support Vector Machines
 
 ## 1.1 wᵀx + b = 0 ne demek?
 
@@ -22,7 +22,7 @@ bağımsızdır:
 
 `w` ağırlık vektörü (hiperdüzlemin normali), `b` sabit terim.
 
-## 1.2 Margin — SVM'in ayırt edici fikri
+## 1.2 Margin: SVM'in ayırt edici fikri
 
 Sonsuz sayıda ayırıcı hiperdüzlem varken SVM **marjini en büyük olanı** seçer:
 
@@ -57,16 +57,16 @@ min (1/2)||w||² + C Σ ξᵢ      koşul: y⁽ⁱ⁾(wᵀx⁽ⁱ⁾ + b) ≥ 1 
 
 | C | Davranış |
 |---|---|
-| Küçük | Geniş marjin, çok ihlal toleransı — daha basit model, aşırı öğrenme riski düşük |
-| Büyük | Dar marjin, az tolerans — eğitim verisine sıkı uyum, aşırı öğrenme riski yüksek |
+| Küçük | Geniş marjin, çok ihlal toleransı: daha basit model, aşırı öğrenme riski düşük |
+| Büyük | Dar marjin, az tolerans: eğitim verisine sıkı uyum, aşırı öğrenme riski yüksek |
 
-`C`, düzenlileştirmenin **tersidir** — lojistik regresyondaki `C` ile aynı mantık.
+`C`, düzenlileştirmenin **tersidir:** lojistik regresyondaki `C` ile aynı mantık.
 
 Bu formülasyonun kayıp fonksiyonu **hinge loss**'tur: `max(0, 1 - y·f(x))`.
 Log-loss'tan farkı: doğru tarafta ve marjin dışında olan noktalara **sıfır**
 ceza verir. Lojistik regresyon her noktaya küçük de olsa ceza verir.
 
-## 1.4 SVR — regresyon için SVM
+## 1.4 SVR: regresyon için SVM
 
 SVR mantığı ters çevirir: marjin içinde **kalan** tahminleri ödüllendirir.
 
@@ -88,7 +88,7 @@ sapmalar **görmezden gelinir.**
 ## 1.5 Kernel trick
 
 Doğrusal ayrılamayan veri için: veriyi daha yüksek boyuta taşı, orada ayır.
-Kernel trick bu dönüşümü **açıkça hesaplamadan** yapar — yalnızca iç çarpımlar
+Kernel trick bu dönüşümü **açıkça hesaplamadan** yapar, yalnızca iç çarpımlar
 gerektiği için `K(x, x')` fonksiyonu yeterlidir.
 
 | Kernel | Formül | Ne zaman |
@@ -117,12 +117,12 @@ boru = Pipeline([("olcek", StandardScaler()),
   veride büyük ölçekli özellik kerneli tamamen ele geçirir.
 - **Olasılık çıktısı pahalıdır.** `probability=True` içeride Platt ölçekleme
   için ek CV çalıştırır; gerekmiyorsa açmayın.
-- **Ölçeklenebilirlik:** eğitim maliyeti kabaca O(n²)–O(n³). ~50 000 örnekten
+- **Ölçeklenebilirlik:** eğitim maliyeti kabaca O(n²)-O(n³). ~50 000 örnekten
   sonra `LinearSVC` veya `SGDClassifier` düşünün.
 
 ---
 
-# Bölüm 2 — K-Nearest Neighbors
+# Bölüm 2: K-Nearest Neighbors
 
 ## 2.1 Fikir
 
@@ -146,13 +146,13 @@ Manhattan: d = Σ|xᵢ - yᵢ|
 Minkowski ailesinin p=2 ve p=1 halleridir. Yüksek boyutta Manhattan bazen daha
 kararlıdır.
 
-## 2.3 Ölçekleme — KNN'in en kritik konusu
+## 2.3 Ölçekleme: KNN'in en kritik konusu
 
 Ders notu doğru söylüyor: KNN *"özellikler benzer ölçekteyse"* çalışır.
 
 **Neden bu kadar kritik:** mesafe hesabı ölçeğin karesiyle büyür. Gelir (30 000
-– 90 000) ve yaş (20 – 60) aynı mesafede kullanılırsa, gelir farkı yaş farkını
-tamamen bastırır — model fiilen tek özellikle çalışır.
+-90 000) ve yaş (20 - 60) aynı mesafede kullanılırsa, gelir farkı yaş farkını
+tamamen bastırır, model fiilen tek özellikle çalışır.
 
 Test dosyasındaki `test_olcekleme_tahmini_degistirebilir`, ölçeklemenin k-NN
 tahminini **ters çevirdiği** somut bir örnek içeriyor.
@@ -164,7 +164,7 @@ Her zaman Pipeline içinde ölçekleyin.
 | k | Davranış |
 |---|---|
 | 1 | Sıfır bias, maksimum varyans. Gürültülü etikete tam uyum |
-| Küçük (3–5) | Esnek, yerel |
+| Küçük (3-5) | Esnek, yerel |
 | Büyük | Düzgün sınır, yüksek bias; k = n ise sabit tahmin |
 
 İkili sınıflandırmada **tek sayı** seçin (beraberlik olmasın). CV ile seçilir.
@@ -180,7 +180,7 @@ Naif KNN her sorguda tüm eğitim verisiyle mesafe hesaplar: O(n·p).
 
 **Boyutun laneti:** boyut arttıkça tüm noktalar birbirine eşit uzaklıkta
 görünmeye başlar, "en yakın komşu" kavramı anlamını yitirir. Bu, ağaç
-yapılarının da çözemediği yapısal bir sınırdır. p > 20–30 ise önce boyut
+yapılarının da çözemediği yapısal bir sınırdır. p > 20-30 ise önce boyut
 indirgeme (PCA) veya başka bir algoritma düşünün.
 
 ## 2.6 Uygulama
@@ -191,12 +191,12 @@ Pipeline([("olcek", StandardScaler()),
           ("model", KNeighborsClassifier(n_neighbors=5, weights="distance"))])
 ```
 
-`weights="distance"` yakın komşulara daha çok oy verir — genellikle uniform'dan
+`weights="distance"` yakın komşulara daha çok oy verir, genellikle uniform'dan
 iyidir.
 
 ---
 
-# Bölüm 3 — Naive Bayes
+# Bölüm 3: Naive Bayes
 
 ## 3.1 Bayes teoreminden sınıflandırıcıya
 
@@ -218,7 +218,7 @@ bağımsız olduğu varsayımından. Bu varsayım neredeyse her zaman yanlışt�
 olması gerekmez; yalnızca **doğru sıralanması** gerekir. Bağımlılık her iki
 sınıfın skorunu benzer yönde bozarsa argmax değişmez. Bu yüzden Naive Bayes
 kalibrasyonu kötü (olasılıkları uç değerlere yığılır) ama sınıflandırması iyi
-bir modeldir — olasılık çıktısını doğrudan kullanmayın.
+bir modeldir, olasılık çıktısını doğrudan kullanmayın.
 
 ## 3.2 Sıfır olasılık sorunu ve Laplace düzeltmesi
 
@@ -231,7 +231,7 @@ P(xᵢ|y) = (sayım + α) / (toplam + α · olası_değer_sayısı)
 ```
 
 α = 1 ile: `(0+1)/(2+2) = 0.25`. scikit-learn'de `alpha` parametresi; metin
-sınıflandırmada 0.1–1.0 arası tipik.
+sınıflandırmada 0.1-1.0 arası tipik.
 
 ## 3.3 Üç varyant
 
@@ -260,7 +260,7 @@ sürekliyse Gaussian; ya da kategorikleri sayısallaştırıp Gaussian. En temiz
 
 **Artı:**
 - Çok hızlı (tek geçiş), az bellek
-- Yüksek boyutta iyi çalışır — metin sınıflandırmanın klasik baz çizgisidir
+- Yüksek boyutta iyi çalışır: metin sınıflandırmanın klasik baz çizgisidir
 - Küçük veriyle bile makul sonuç verir
 - Eksik veriyle çalışabilir (o özellik çarpımdan düşer)
 
@@ -276,7 +276,7 @@ sürekliyse Gaussian; ya da kategorikleri sayısallaştırıp Gaussian. En temiz
 
 | | SVM | KNN | Naive Bayes |
 |---|---|---|---|
-| Eğitim maliyeti | Yüksek O(n²–n³) | **Sıfır** | **Çok düşük** |
+| Eğitim maliyeti | Yüksek O(n²-n³) | **Sıfır** | **Çok düşük** |
 | Tahmin maliyeti | Düşük | **Yüksek** | Çok düşük |
 | Ölçekleme gerekli | **Evet** | **Evet** | Hayır |
 | Yüksek boyut | İyi (lineer kernel) | **Kötü** | **İyi** |

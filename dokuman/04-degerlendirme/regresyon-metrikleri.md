@@ -3,10 +3,10 @@
 Kod: [`gozetimli/metrikler/regresyon.py`](../../src/gozetimli/metrikler/regresyon.py) ·
 Test: [`testler/test_regresyon_metrikleri.py`](../../testler/test_regresyon_metrikleri.py)
 
-> **Kaynak notu.** Elimizdeki ders notlarında (5–19 numaralı PDF'ler) regresyon
+> **Kaynak notu.** Elimizdeki ders notlarında (5-19 numaralı PDF'ler) regresyon
 > metrikleri ayrı bir başlık olarak işlenmiyor. MSE yalnızca doğrusal/Ridge/Lasso
 > maliyet fonksiyonunun içinde, varyans ise karar ağacı bölme ölçütü olarak
-> geçiyor. Klasörde 1–4 numaralı PDF'ler eksik; bu konuların orada anlatılmış
+> geçiyor. Klasörde 1-4 numaralı PDF'ler eksik; bu konuların orada anlatılmış
 > olması muhtemel. Buradaki tanımlar standart literatürden alınmış ve
 > scikit-learn'e karşı doğrulanmıştır. Ayrıntı: [KAYNAK-NOTLARI.md](../KAYNAK-NOTLARI.md).
 
@@ -26,7 +26,7 @@ MAE  = (1/n) Σ |y - ŷ|
 Ders notundaki maliyet fonksiyonu J(θ) = (1/2m) Σ (h(x) - y)² bunun 1/2 katıdır
 (türev alırken sadeleşsin diye).
 
-Birimi hedefin **karesidir** — "MSE 2500" cümlesi kimseye bir şey anlatmaz.
+Birimi hedefin **karesidir:** "MSE 2500" cümlesi kimseye bir şey anlatmaz.
 Raporlarken **RMSE** kullanın: hedefle aynı birimdedir, "ortalama 50 TL sapıyor"
 denebilir.
 
@@ -38,7 +38,7 @@ hatalar aynı büyüklükteyse olur. **Aradaki fark bir teşhis aracıdır:**
 | Durum | Anlamı |
 |---|---|
 | RMSE ≈ MAE | Hatalar birbirine yakın büyüklükte, homojen |
-| RMSE ≫ MAE (2 kat+) | Birkaç büyük hata ortalamayı taşıyor — o örneklere bakın |
+| RMSE ≫ MAE (2 kat+) | Birkaç büyük hata ortalamayı taşıyor: o örneklere bakın |
 
 ```python
 from gozetimli.metrikler.regresyon import mse, rmse, mae
@@ -61,7 +61,7 @@ regresörünün yaprakta ortalama döndürmesi de bundandır: varyans azaltımı
 ```python
 from gozetimli.metrikler.regresyon import medyan_mutlak_hata, maksimum_hata
 medyan_mutlak_hata(y, tahmin)   # aykırı değerlere en dayanıklı
-maksimum_hata(y, tahmin)        # en kötü tek örnek — SLA garantisi gerekiyorsa
+maksimum_hata(y, tahmin)        # en kötü tek örnek, SLA garantisi gerekiyorsa
 ```
 
 100 örnekten birinde 100 birimlik hata varsa: MAE = 1, MSE = 100, medyan
@@ -80,8 +80,8 @@ R² = 1 - SS_kalıntı / SS_toplam = 1 - Σ(y - ŷ)² / Σ(y - ȳ)²
 | R² | Anlamı |
 |---|---|
 | 1.0 | Kusursuz |
-| 0.0 | Ortalamayla aynı — model hiçbir şey öğrenmemiş |
-| < 0 | Ortalamadan **kötü** — test setinde bu gerçek bir uyarıdır |
+| 0.0 | Ortalamayla aynı: model hiçbir şey öğrenmemiş |
+| < 0 | Ortalamadan **kötü:** test setinde bu gerçek bir uyarıdır |
 
 Negatif R² şaşırtıcı gelebilir ama mümkündür ve önemlidir: modeliniz test
 setinde, "her zaman eğitim ortalamasını söyle" stratejisinden daha kötü demektir.
@@ -132,7 +132,7 @@ tuzağı vardır:**
    (Bu implementasyon epsilon ile korur ama sayı anlamsızlaşır.)
 2. **Asimetriktir.** Düşük tahminin cezası en fazla 1.0'dır (tahmin 0 olsa
    bile); yüksek tahminin cezası sınırsızdır. Model sistematik olarak düşük
-   tahmin etmeye itilir — talep tahmininde bu, stoksuz kalmak demektir.
+   tahmin etmeye itilir, talep tahmininde bu, stoksuz kalmak demektir.
 3. **Küçük gerçek değerlerde patlar.** y = 1 iken ŷ = 2 vermek %100 hata; oysa
    mutlak hata 1 birim.
 
@@ -187,7 +187,7 @@ regresyon_raporu(y_test, tahminler, ozellik_sayisi=X.shape[1])
 ```
 
 Burada `r2` ile `aciklanan_varyans` eşit, çünkü kalıntıların ortalaması sıfır
-(+1, -1, +2, -2) — yani modelde sistematik kayma yok.
+(+1, -1, +2, -2), yani modelde sistematik kayma yok.
 
 ---
 
@@ -198,10 +198,10 @@ tutmaz. Aranacak desenler:
 
 | Desen | Teşhis |
 |---|---|
-| Rastgele dağılım, 0 etrafında | İyi — modelde kalan yapı yok |
-| Huni şekli (yelpaze) | Değişen varyans — hedefin log'unu almayı deneyin |
-| Eğri (U veya ters U) | Doğrusal olmayan ilişki kaçırılmış — polinom terim ekleyin |
-| Sistematik kayma | Yanlılık — kesme terimi veya eksik özellik |
+| Rastgele dağılım, 0 etrafında | İyi: modelde kalan yapı yok |
+| Huni şekli (yelpaze) | Değişen varyans: hedefin log'unu almayı deneyin |
+| Eğri (U veya ters U) | Doğrusal olmayan ilişki kaçırılmış: polinom terim ekleyin |
+| Sistematik kayma | Yanlılık: kesme terimi veya eksik özellik |
 | Uç noktalarda kümelenme | Hedef kırpılmış/sansürlü olabilir |
 
 ---
@@ -218,6 +218,6 @@ tutmaz. Aranacak desenler:
 | `mape` | oran | [0, ∞) | hayır | hayır |
 | `smape` | oran | [0, 2] | orta | hayır |
 | `msle` / `rmsle` | log | [0, ∞) | evet (oransal) | hayır |
-| `r2` | — | (-∞, 1] | hayır | **evet** |
-| `duzeltilmis_r2` | — | (-∞, 1] | hayır | **evet** |
-| `aciklanan_varyans` | — | (-∞, 1] | hayır | **evet** |
+| `r2` |: | (-∞, 1] | hayır | **evet** |
+| `duzeltilmis_r2` |: | (-∞, 1] | hayır | **evet** |
+| `aciklanan_varyans` |: | (-∞, 1] | hayır | **evet** |

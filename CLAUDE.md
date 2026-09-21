@@ -40,11 +40,11 @@ Diğer                         → KKat
 ```
 
 Tekrar eden bir varlık (hasta, mağaza, kullanıcı, belge) varsa `GrupKKat`
-kullanılmadığında skorlar 20–45 puan şişer. Ölçülmüş örnek:
+kullanılmadığında skorlar 20-45 puan şişer. Ölçülmüş örnek:
 [`dokuman/04-degerlendirme/veri-sizintisi.md`](dokuman/04-degerlendirme/veri-sizintisi.md)
 
 **2. Ön işlemenin tamamını Pipeline'a koy.** Ölçekleme, doldurma, kodlama,
-özellik seçimi — hepsi CV döngüsünün içinde olmalı. Döngü dışında yapılan
+özellik seçimi, hepsi CV döngüsünün içinde olmalı. Döngü dışında yapılan
 özellik seçimi, sinyalsiz veride bile %73 doğruluk üretir.
 
 **3. Metriği probleme göre seç**, varsayılana göre değil:
@@ -70,7 +70,7 @@ varsayılanı yalnızca sınıflar dengeliyse ve hata maliyetleri eşitse doğru
 
 ## Kod yazma kuralları
 
-**Dil.** Kod, yorumlar, docstring'ler, hata mesajları, test adları — hepsi
+**Dil.** Kod, yorumlar, docstring'ler, hata mesajları, test adları, hepsi
 Türkçe. Değişken ve fonksiyon adları Türkçe (`kesinlik`, `bolucu`,
 `kat_skorlari`). İngilizce terimin kendisi gerektiğinde parantez içinde
 verilir: `duyarlilik` (recall). Bu tutarlılığı bozmayın.
@@ -100,9 +100,9 @@ kullanmamalı" bilgisi, tanımdan daha değerlidir.
 
 Yeni bir fonksiyon eklerken en az şu üç testi yazın:
 
-1. **Elle hesaplanmış bir değer** — docstring'de hesabın kendisi yazılı olmalı
-2. **Kenar durum** — boş, tek sınıf, sıfıra bölme, uzunluk uyuşmazlığı
-3. **Özellik (property)** — simetri, sınır, monotonluk gibi değişmezler
+1. **Elle hesaplanmış bir değer:** docstring'de hesabın kendisi yazılı olmalı
+2. **Kenar durum:** boş, tek sınıf, sıfıra bölme, uzunluk uyuşmazlığı
+3. **Özellik (property):** simetri, sınır, monotonluk gibi değişmezler
 
 scikit-learn'de karşılığı olan her metrik için
 [`testler/test_sklearn_uyumu.py`](testler/test_sklearn_uyumu.py) içine bir
@@ -121,10 +121,10 @@ doğru olup olmadığını kontrol edin. Bu depodaki beş kaynak hatası tam ola
 
 ---
 
-## Kaynak materyal ve telif — dikkat
+## Kaynak materyal ve telif: dikkat
 
 Bu deponun içeriği Atıl Samancıoğlu'nun ML kursundaki ders notları çalışılarak
-yazıldı. **Ders notu PDF'leri bu depoya asla eklenmez** — telifli üçüncü taraf
+yazıldı. **Ders notu PDF'leri bu depoya asla eklenmez:** telifli üçüncü taraf
 materyali ve depo public.
 
 `.gitignore` içinde `*.pdf` ve `ders-notlari/` bilinçli olarak engellidir. Bir
@@ -145,8 +145,8 @@ src/gozetimli/
 ├── saflik.py                    Entropi, Gini, bilgi kazancı, varyans azaltımı
 ├── boosting.py                  Sigmoid/log-odds, AdaBoost, XGBoost formülleri
 ├── metrikler/
-│   ├── siniflandirma.py         18 fonksiyon — matris, P/R/F, MCC, ROC, PR, eşik
-│   └── regresyon.py             13 fonksiyon — MSE/MAE/R²/MAPE/MSLE ailesi
+│   ├── siniflandirma.py         18 fonksiyon, matris, P/R/F, MCC, ROC, PR, eşik
+│   └── regresyon.py             13 fonksiyon. MSE/MAE/R²/MAPE/MSLE ailesi
 ├── dogrulama/
 │   ├── bolme.py                 7 bölme stratejisi + egitim_test_bol
 │   └── capraz.py                CV çalıştırıcı, OOF, nested CV, öğrenme eğrisi
@@ -168,7 +168,7 @@ git config user.name "FlyerFukas"
 git config user.email "250136320+FlyerFukas@users.noreply.github.com"
 ```
 
-`furkanakduman3452@gmail.com` ile commit atmayın — GitHub hesabı üniversite
+`furkanakduman3452@gmail.com` ile commit atmayın. GitHub hesabı üniversite
 adresine bağlı ve Vercel Hobby planı yabancı commit yazarlı dağıtımı
 `Deployment Blocked` ile reddediyor.
 

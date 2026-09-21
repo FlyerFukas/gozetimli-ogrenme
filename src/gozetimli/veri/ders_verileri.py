@@ -1,4 +1,4 @@
-"""Ders notlarındaki örnek veri setleri — el hesaplarını yeniden üretmek için.
+"""Ders notlarındaki örnek veri setleri, el hesaplarını yeniden üretmek için.
 
 Bu tablolar Atıl Samancıoğlu'nun ders notlarındaki (5-19 numaralı PDF'ler)
 öğretici mini veri setleridir. Her biri 4-7 satırlıktır ve tek amacı bir
@@ -7,7 +7,7 @@ için kullanılmamalıdır.
 
 Notlardaki sayısal sonuçların doğrulaması `testler/test_ders_ornekleri.py`
 içindedir. Notlarda tespit edilen iki tutarsızlık `KAYNAK_NOTLARI` sözlüğünde
-açıkça yazılıdır — sessizce düzeltilmemiştir.
+açıkça yazılıdır, sessizce düzeltilmemiştir.
 """
 
 from __future__ import annotations
@@ -305,7 +305,7 @@ KAYNAK_NOTLARI = {
         "varyans azaltımını verdiğini söylüyor (94.64). Tüm eşikler hesaplandığında "
         "en iyi eşik 3.35'tir: azaltım 93.12, 3.1 ise 83.06. Notun Tablo 3'ündeki "
         "özet sayılar (3.1 -> 94.6, 3.35 -> 80.3) da yeniden üretilemiyor. "
-        "Not: 94.64 rakamı, hatalı kök varyanstan (124.83) türetilmiştir — "
+        "Not: 94.64 rakamı, hatalı kök varyanstan (124.83) türetilmiştir, "
         "124.83 - 30.19 = 94.64. Ağırlıklı varyans 30.19 doğrudur. "
         "Doğrulama: testler/test_ders_ornekleri.py::test_burs_tum_esikler"
     ),
@@ -328,7 +328,7 @@ KAYNAK_NOTLARI = {
     ),
     "xgboost_kok_benzerlik_gerekcesi": (
         "18-XGBoost_Algorithm.pdf: S_kök = 0 sonucu 'çünkü kök düğümde tek bir "
-        "grup var' diye gerekçelendirilmiş. Gerekçe yanlış — tek grup olması "
+        "grup var' diye gerekçelendirilmiş. Gerekçe yanlış, tek grup olması "
         "similarity'yi sıfırlamaz. Doğru sebep artıkların toplamının sıfır "
         "olmasıdır: 2·(-0.7143) + 5·(0.2857) = 0, payda ne olursa olsun pay 0. "
         "Bu bir tesadüf de değildir: F₀ log-odds olarak seçildiğinde Σ(y - p) = 0 "
